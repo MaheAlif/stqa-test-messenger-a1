@@ -1,0 +1,84 @@
+package com.ezmata.messenger.controller;
+
+import com.ezmata.messenger.api.request.UserUpdateRequest;
+import com.ezmata.messenger.api.response.GenericResponse;
+import com.ezmata.messenger.model.User;
+import com.ezmata.messenger.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class UserController {
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsers(Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to view users");
+        }
+        if(!authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable long id, Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to view user details");
+        }
+        if(!authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
+        if (userService.getById(id).isPresent()) {
+            return ResponseEntity.ok(userService.getById(id).get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @GetMapping("/users/username/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username, Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be logged in to view user details");
+            }
+        if(!authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
+        if (userService.getByUsername(username).isPresent()) {
+            return ResponseEntity.ok(userService.getByUsername(username).get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<?> updateUser(
+            @PathVariable long id,
+            @RequestBody UserUpdateRequest request,
+            Authentication authentication) {
+        if (authentication == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No authentication token provided");
+        }
+        if(!authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        }
+        try {
+            String usernameFromToken = authentication.getName();
+            System.out.println("Updating user with id: " + id + " by user: " + usernameFromToken);
+            System.out.println("New details - username: " + request.username() + ", email: " + request.email() + ", password: " + request.password());
+            User updatedUser = userService.updateUser(id, usernameFromToken, request);
+            return ResponseEntity.ok(new GenericResponse("User updated successfully", updatedUser));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+    }
+}

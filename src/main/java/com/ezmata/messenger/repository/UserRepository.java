@@ -11,4 +11,5 @@ public interface UserRepository {
     Optional<User> getByUsername(String username);
     List<User> getAll();
     boolean existsByUsername(String username);
+    User update(long id, User updatedUser);
 }

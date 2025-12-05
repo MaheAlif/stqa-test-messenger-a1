@@ -1,5 +1,6 @@
 package com.ezmata.messenger.service;
 
+import com.ezmata.messenger.api.request.UserUpdateRequest;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,27 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.getAll();
+    }
+
+    public User updateUser(long id, String usernameFromToken, UserUpdateRequest request) {
+        Optional<User> existingUserOpt = userRepository.get(id);
+        if(request.id() != null) {
+            throw new IllegalArgumentException("User ID cannot be updated");
+        }
+        if(existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+            if(!existingUser.getUsername().equals(usernameFromToken)) {
+                throw new SecurityException("You can only update your own user details");
+            }
+            User updatedUser = new User(
+                    existingUser.getUserId(),
+                    request.username() != null ? request.username() : existingUser.getUsername(),
+                    request.email() != null ? request.email() : existingUser.getEmail(),
+                    request.password() != null ? request.password() : existingUser.getPassword()
+            );
+            return userRepository.update(id, updatedUser);
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
     }
 }

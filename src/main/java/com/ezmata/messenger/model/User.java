@@ -25,4 +25,8 @@ public class User {
     public long getUserId() {
         return id;
     }
+
+    public String getEmail() {
+        return email;
+    }
 }
