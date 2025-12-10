@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, User> usersById = new ConcurrentHashMap<>();
     private final Map<String, User> usersByUsername = new ConcurrentHashMap<>();
+    private final Map<Long, List<Long>> blockedUsers = new ConcurrentHashMap<>();
 
     private final AtomicLong userId = new AtomicLong(101);
     @Override
@@ -52,6 +53,27 @@ public class InMemoryUserRepository implements UserRepository {
         usersByUsername.remove(oldUsername);
         usersByUsername.put(user.getUsername(), user);
         return user;
+    }
+
+    @Override
+    public boolean blockUser(long userId, long blockId) {
+        blockedUsers.putIfAbsent(userId, new ArrayList<>());
+        List<Long> blockedList = blockedUsers.get(userId);
+        if (!blockedList.contains(blockId)) {
+            blockedList.add(blockId);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean unblockUser(long userId, long blockId) {
+        List<Long> blockedList = blockedUsers.get(userId);
+        if (blockedList != null && blockedList.contains(blockId)) {
+            blockedList.remove(blockId);
+            return true;
+        }
+        return false;
     }
 
     @Override

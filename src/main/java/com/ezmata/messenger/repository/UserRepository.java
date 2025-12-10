@@ -12,4 +12,6 @@ public interface UserRepository {
     List<User> getAll();
     boolean existsByUsername(String username);
     User update(long id, User updatedUser);
+    boolean blockUser(long userId, long blockId);
+    boolean unblockUser(long userId, long blockId);
 }
