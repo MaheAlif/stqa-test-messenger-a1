@@ -16,7 +16,7 @@ public interface ConversationRepository {
     public Optional<ConversationType> getConversationType(long conversationId);
     public boolean updateGroupConversationName(long conversationId, String name);
     public boolean addMembers(long conversationId, long[] userId);
-    public boolean removeMember(long conversationId, long userId);
+    public boolean removeMember(long conversationId, long[] userId);
 
     void reset();
 }

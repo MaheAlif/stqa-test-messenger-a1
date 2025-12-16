@@ -99,18 +99,24 @@ public class InMemoryConversationRepository implements ConversationRepository {
     public boolean addMembers(long conversationId, long[] userId) {
         Set<Long> memberSet = members.get(conversationId);
         if (memberSet != null) {
+            System.out.println("Current members before addition: " + memberSet);
             for (long id : userId) {
                 memberSet.add(id);
             }
+            System.out.println("Adding members to conversation ID " + conversationId);
+            System.out.println("Members after addition: " + memberSet);
             return true;
         }
         return false;
     }
     @Override
-    public boolean removeMember(long conversationId, long userId) {
+    public boolean removeMember(long conversationId, long[] userId) {
         Set<Long> memberSet = members.get(conversationId);
         if (memberSet != null) {
-            return memberSet.remove(userId);
+            for (long id : userId) {
+                memberSet.remove(id);
+            }
+            return true;
         }
         return false;
     }

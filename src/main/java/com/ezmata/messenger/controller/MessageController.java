@@ -21,12 +21,12 @@ public class MessageController {
 //    add appropriate parameters
     @GetMapping("/messages/{conversationId}/get")
     public ResponseEntity<?> getMessages(Authentication authentication,
-                                      @PathVariable String conversationId,
+                                      @PathVariable long conversationId,
                                       @RequestParam(required = false, defaultValue = "0") int page,
                                       @RequestParam(required = false, defaultValue = "20") int size) {
         String username = authentication.getName();
         try{
-            List<Message> messages = messageService.getMessagesForConversation(username, Long.parseLong(conversationId));
+            List<Message> messages = messageService.getMessagesForConversation(username, conversationId);
             return ResponseEntity.ok(
                     new GenericResponse<List<Message>>(
                             "Messages retrieved successfully",
@@ -50,7 +50,7 @@ public class MessageController {
                                             @RequestBody String content) {
         String username = authentication.getName();
         try{
-            System.out.println("Sending message to conversation ID: " + conversationId + " with content: " + content);
+            System.out.println("Sending message from: " + username + " to conversation ID: " + conversationId + " with content: " + content);
 //            Message[] messages = List.toArray(messageService.sendMessageToConversation(username, conversationId, content));
 
             Message[] messages = messageService.sendMessageToConversation(username, conversationId, content)
@@ -63,6 +63,7 @@ public class MessageController {
                     )
             );
         }catch (IllegalArgumentException e) {
+            System.out.println("Failed to send message: " + e.getMessage());
             return ResponseEntity.badRequest().body(
                     new GenericResponse<>(
                             e.getMessage(),

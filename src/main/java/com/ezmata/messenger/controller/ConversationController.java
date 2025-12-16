@@ -1,6 +1,6 @@
 package com.ezmata.messenger.controller;
 
-import com.ezmata.messenger.records.request.AddConversationMembersRequest;
+import com.ezmata.messenger.records.request.MemberModificationRequest;
 import com.ezmata.messenger.records.request.CreateConversationRequest;
 import com.ezmata.messenger.records.response.MemberModificationResponse;
 import com.ezmata.messenger.model.Conversation;
@@ -60,21 +60,21 @@ public class ConversationController {
     }
 
     @PostMapping("/addMember")
-    public ResponseEntity<?> addMember(Authentication authentication, @RequestBody AddConversationMembersRequest request) {
+    public ResponseEntity<?> addMember(Authentication authentication, @RequestBody MemberModificationRequest request) {
         String username = authentication.getName();
         try{
-            MemberModificationResponse response = conversationService.addMembersToConversation(username, request.conversationId(), request.newMembers());
+            MemberModificationResponse response = conversationService.addMembersToConversation(username, request.conversationId(), request.members());
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{conversationId}/removeMember/{userId}")
-    public ResponseEntity<?> removeMember(Authentication authentication, @PathVariable long conversationId, @PathVariable long userId) {
+    @DeleteMapping("/removeMember/")
+    public ResponseEntity<?> removeMember(Authentication authentication, @RequestBody MemberModificationRequest request) {
         String username = authentication.getName();
         try{
-            MemberModificationResponse response = conversationService.removeMemberFromConversation(username, conversationId, userId);
+            MemberModificationResponse response = conversationService.removeMemberFromConversation(username, request.conversationId(), request.members());
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

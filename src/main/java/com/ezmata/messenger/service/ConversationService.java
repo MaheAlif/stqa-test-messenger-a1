@@ -69,7 +69,7 @@ public class ConversationService {
             System.out.println("Creating group conversation for user ID: " + user.getUserId());
 
             System.out.println("trying to add user ID to member list: " + user.getUserId());
-            System.out.println("Current member IDs before adding: " + memberIds);
+            System.out.println("Current member IDs before adding: " + memberIds.length);
             List<Long> memberIdList = new ArrayList<>();
             for (long id : memberIds) {
                 memberIdList.add(id);
@@ -116,10 +116,10 @@ public class ConversationService {
         }
     }
 
-    public MemberModificationResponse removeMemberFromConversation(String username, long conversationId, long newMemberId) {
+    public MemberModificationResponse removeMemberFromConversation(String username, long conversationId, long[] membersToBeRemoved) {
         isAConversationMember(username, conversationId);
 
-        boolean removed = conversationRepository.removeMember(conversationId, newMemberId);
+        boolean removed = conversationRepository.removeMember(conversationId, membersToBeRemoved);
         if (removed) {
             long[] membersArray = conversationRepository.getMembers(conversationId)
                     .orElse(List.of())
@@ -151,6 +151,7 @@ public class ConversationService {
             throw new IllegalArgumentException("Failed to retrieve conversation members");
         }
         List<Long> members = membersOpt.get();
+        System.out.println("ConversationId: " + conversationId + ", Members: " + members);
         if (!members.contains(user.getUserId())) {
             throw new IllegalArgumentException("User is not a member of this conversation");
         }

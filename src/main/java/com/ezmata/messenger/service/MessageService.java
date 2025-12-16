@@ -36,9 +36,13 @@ public class MessageService {
 
     public List<Message> sendMessageToConversation(String username, long conversationId, String content) {
         Conversation conversation = conversationService.getConversationById(username, conversationId);
+        System.out.println("SendMessageController::UserName: " + username + "ConversationId: " + conversationId + ", Content: " + content);
         long senderId = userService.getByUsername(username).get().getUserId();
+        System.out.println("\tSenderId: " + senderId);
         if(conversation.getType() == ConversationType.DIRECT){
+            System.out.println("\tDirect Conversation");
             long receiverId = conversationService.getOtherParticipantId(conversationId, senderId);
+            System.out.println("\t\tReceiverId: " + receiverId);
             if(userService.isUserBlockedBy(receiverId, senderId)){
                 throw new IllegalArgumentException("You must unblock the user to send messages");
             }
@@ -52,9 +56,12 @@ public class MessageService {
                 throw new IllegalArgumentException("You cannot send message to this conversation");
             }
         }else{
+            System.out.println("\tGroup Conversation");
             try{
+                System.out.println("\t\tSending message to group conversation");
                 return messageRepository.sendMessage(conversationId, senderId, content).orElse(new ArrayList<Message>());
             }catch (Exception e){
+                System.out.println("\t\tFailed to send message: " + e.getMessage());
                 throw new IllegalArgumentException("Failed to send message to this conversation:" + e.getMessage());
             }
         }

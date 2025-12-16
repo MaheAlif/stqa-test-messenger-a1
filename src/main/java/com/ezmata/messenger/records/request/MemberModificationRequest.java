@@ -1,6 +1,6 @@
 package com.ezmata.messenger.records.request;
 
-public record AddConversationMembersRequest(
+public record MemberModificationRequest(
         long conversationId,
-        long[] newMembers
+        long[] members
 ) {}
