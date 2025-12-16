@@ -1,7 +1,7 @@
 package com.ezmata.messenger.service;
 
-import com.ezmata.messenger.api.response.LoginResponse;
-import com.ezmata.messenger.api.response.SignupResponse;
+import com.ezmata.messenger.records.response.LoginResponse;
+import com.ezmata.messenger.records.response.SignupResponse;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.security.JwtUtil;
 import org.springframework.stereotype.Service;

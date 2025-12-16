@@ -1,6 +1,6 @@
 package com.ezmata.messenger.service;
 
-import com.ezmata.messenger.api.response.MemberModificationResponse;
+import com.ezmata.messenger.records.response.MemberModificationResponse;
 import com.ezmata.messenger.model.Conversation;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.repository.ConversationRepository;

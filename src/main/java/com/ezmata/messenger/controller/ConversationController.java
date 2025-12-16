@@ -1,8 +1,8 @@
 package com.ezmata.messenger.controller;
 
-import com.ezmata.messenger.api.request.AddConversationMembersRequest;
-import com.ezmata.messenger.api.request.CreateConversationRequest;
-import com.ezmata.messenger.api.response.MemberModificationResponse;
+import com.ezmata.messenger.records.request.AddConversationMembersRequest;
+import com.ezmata.messenger.records.request.CreateConversationRequest;
+import com.ezmata.messenger.records.response.MemberModificationResponse;
 import com.ezmata.messenger.model.Conversation;
 import com.ezmata.messenger.service.ConversationService;
 import org.springframework.http.ResponseEntity;

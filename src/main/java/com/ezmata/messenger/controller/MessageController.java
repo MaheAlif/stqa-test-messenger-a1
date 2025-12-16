@@ -1,6 +1,6 @@
 package com.ezmata.messenger.controller;
 
-import com.ezmata.messenger.api.response.GenericResponse;
+import com.ezmata.messenger.records.response.GenericResponse;
 import com.ezmata.messenger.model.Message;
 import com.ezmata.messenger.service.MessageService;
 import org.springframework.http.ResponseEntity;

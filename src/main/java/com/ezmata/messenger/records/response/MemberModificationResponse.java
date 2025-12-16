@@ -1,4 +1,4 @@
-package com.ezmata.messenger.api.response;
+package com.ezmata.messenger.records.response;
 
 public record MemberModificationResponse(
         String message,

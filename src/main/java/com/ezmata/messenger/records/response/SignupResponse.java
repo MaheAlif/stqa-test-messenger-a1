@@ -1,4 +1,4 @@
-package com.ezmata.messenger.api.response;
+package com.ezmata.messenger.records.response;
 
 import com.ezmata.messenger.model.User;
 

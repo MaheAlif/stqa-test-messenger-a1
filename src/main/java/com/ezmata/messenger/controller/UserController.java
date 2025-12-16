@@ -1,7 +1,7 @@
 package com.ezmata.messenger.controller;
 
-import com.ezmata.messenger.api.request.UserUpdateRequest;
-import com.ezmata.messenger.api.response.GenericResponse;
+import com.ezmata.messenger.records.request.UserUpdateRequest;
+import com.ezmata.messenger.records.response.GenericResponse;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.service.UserService;
 import org.springframework.http.HttpStatus;

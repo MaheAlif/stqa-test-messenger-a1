@@ -1,4 +1,4 @@
-package com.ezmata.messenger.api.request;
+package com.ezmata.messenger.records.request;
 
 public record UserUpdateRequest (
         Long id,

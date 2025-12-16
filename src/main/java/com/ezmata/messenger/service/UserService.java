@@ -1,6 +1,6 @@
 package com.ezmata.messenger.service;
 
-import com.ezmata.messenger.api.request.UserUpdateRequest;
+import com.ezmata.messenger.records.request.UserUpdateRequest;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.repository.UserRepository;
 import org.springframework.stereotype.Service;

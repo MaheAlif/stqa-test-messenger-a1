@@ -1,10 +1,9 @@
 package com.ezmata.messenger.controller;
 
-import com.ezmata.messenger.api.request.LoginRequest;
-import com.ezmata.messenger.api.request.SignupRequest;
-import com.ezmata.messenger.api.response.LoginResponse;
-import com.ezmata.messenger.api.response.SignupResponse;
-import com.ezmata.messenger.security.JwtUtil;
+import com.ezmata.messenger.records.request.LoginRequest;
+import com.ezmata.messenger.records.request.SignupRequest;
+import com.ezmata.messenger.records.response.LoginResponse;
+import com.ezmata.messenger.records.response.SignupResponse;
 import com.ezmata.messenger.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final JwtUtil jwtUtil;
 
-    public AuthController(AuthService authService, JwtUtil jwtUtil) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
-        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/signup")
