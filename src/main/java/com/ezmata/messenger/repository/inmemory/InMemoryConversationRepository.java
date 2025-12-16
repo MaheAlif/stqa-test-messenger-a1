@@ -70,6 +70,16 @@ public class InMemoryConversationRepository implements ConversationRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<ConversationType> getConversationType(long conversationId) {
+        Conversation conversation = conversations.get(conversationId);
+        if (conversation != null) {
+            return Optional.of(ConversationType.valueOf(conversation.getType()));
+        }
+        return Optional.empty();
+    }
+
     @Override
     public boolean updateGroupConversationName(long conversationId, String name) {
         Conversation conversation = conversations.get(conversationId);

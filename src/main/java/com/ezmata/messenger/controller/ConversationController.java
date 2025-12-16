@@ -2,7 +2,6 @@ package com.ezmata.messenger.controller;
 
 import com.ezmata.messenger.api.request.AddConversationMembersRequest;
 import com.ezmata.messenger.api.request.CreateConversationRequest;
-import com.ezmata.messenger.api.response.ConversationMessagesResponse;
 import com.ezmata.messenger.api.response.MemberModificationResponse;
 import com.ezmata.messenger.model.Conversation;
 import com.ezmata.messenger.service.ConversationService;
@@ -73,17 +72,6 @@ public class ConversationController {
         String username = authentication.getName();
         try{
             MemberModificationResponse response = conversationService.removeMemberFromConversation(username, conversationId, userId);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/{conversationId}/messages")
-    public ResponseEntity<?> getConversationMessages(Authentication authentication, @PathVariable long conversationId) {
-        String username = authentication.getName();
-        try {
-            ConversationMessagesResponse response = conversationService.getConversationMessages(username, conversationId);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

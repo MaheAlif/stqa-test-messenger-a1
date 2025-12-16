@@ -1,11 +1,9 @@
 package com.ezmata.messenger.service;
 
-import com.ezmata.messenger.api.response.ConversationMessagesResponse;
 import com.ezmata.messenger.api.response.MemberModificationResponse;
 import com.ezmata.messenger.model.Conversation;
 import com.ezmata.messenger.model.User;
 import com.ezmata.messenger.repository.ConversationRepository;
-import com.ezmata.messenger.security.JwtUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +14,9 @@ public class ConversationService {
 
     private UserService userService;
     private ConversationRepository conversationRepository;
-    private JwtUtil jwtUtil;
 
-    public ConversationService(ConversationRepository conversationRepository, JwtUtil jwtUtil) {
+    public ConversationService(ConversationRepository conversationRepository) {
         this.conversationRepository = conversationRepository;
-        this.jwtUtil = jwtUtil;
     }
 
     public List<Conversation> getUserConversations(String username) {
@@ -135,11 +131,5 @@ public class ConversationService {
         if (membersOpt.isEmpty() || !membersOpt.get().contains(user.getUserId())) {
             throw new SecurityException("User is not a member of this conversation");
         }
-    }
-
-    public ConversationMessagesResponse getConversationMessages(String username, long conversationId) {
-        isAConversationMember(username, conversationId);
-        // Implementation to retrieve messages would go here
-        return null; // Placeholder return
     }
 }
