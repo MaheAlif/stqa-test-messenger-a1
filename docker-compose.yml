@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  messenger-api:
+    build: .
+    container_name: stqa-messenger-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+    stdin_open: true
+    tty: true

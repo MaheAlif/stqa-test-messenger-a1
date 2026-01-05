@@ -1,0 +1,29 @@
+# Ignore build artifacts
+build/
+.gradle/
+out/
+*.log
+
+# Ignore IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Ignore Git
+.git/
+.gitignore
+.gitattributes
+
+# Ignore documentation (not needed in container)
+*.md
+!README.md
+
+# Ignore test scripts
+*.py
+*.txt
+
+# Ignore local environment files
+.env
+.env.local
