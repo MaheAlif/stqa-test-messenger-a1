@@ -19,80 +19,6 @@
 - **Actual:** _[To be filled during testing]_
 - **Evidence:** screenshot-auth-001.png
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [Test Cases for Messenger API](#test-cases-for-messenger-api)
-  - [Test Case Template](#test-case-template)
-  - [PART 1: AUTH APIs](#part-1-auth-apis)
-    - [TC-AUTH-001: Valid User Signup](#tc-auth-001-valid-user-signup)
-    - [TC-AUTH-002: Duplicate Username Signup](#tc-auth-002-duplicate-username-signup)
-    - [TC-AUTH-003: Signup with Empty Username](#tc-auth-003-signup-with-empty-username)
-    - [TC-AUTH-004: Signup with Null Email](#tc-auth-004-signup-with-null-email)
-    - [TC-AUTH-005: Signup with Invalid Email Format](#tc-auth-005-signup-with-invalid-email-format)
-    - [TC-AUTH-006: Signup with Empty Password](#tc-auth-006-signup-with-empty-password)
-    - [TC-AUTH-007: Valid Login](#tc-auth-007-valid-login)
-    - [TC-AUTH-008: Login with Wrong Password](#tc-auth-008-login-with-wrong-password)
-    - [TC-AUTH-009: Login with Non-existent User](#tc-auth-009-login-with-non-existent-user)
-    - [TC-AUTH-010: Logout](#tc-auth-010-logout)
-    - [TC-AUTH-011: Auth Test with Valid Token](#tc-auth-011-auth-test-with-valid-token)
-    - [TC-AUTH-012: Auth Test with Invalid Token](#tc-auth-012-auth-test-with-invalid-token)
-    - [TC-AUTH-013: Auth Test without Token](#tc-auth-013-auth-test-without-token)
-    - [TC-AUTH-014: Invalid request method](#tc-auth-014-invalid-request-method)
-  - [PART 2: USER APIs](#part-2-user-apis)
-    - [TC-USER-001: Get All Users (Authorized)](#tc-user-001-get-all-users-authorized)
-    - [TC-USER-002: Get All Users (Unauthorized)](#tc-user-002-get-all-users-unauthorized)
-    - [TC-USER-003: Get User by Valid ID](#tc-user-003-get-user-by-valid-id)
-    - [TC-USER-004: Get User by Invalid ID](#tc-user-004-get-user-by-invalid-id)
-    - [TC-USER-005: Get User by Valid Username](#tc-user-005-get-user-by-valid-username)
-    - [TC-USER-006: Get User by Non-existent Username](#tc-user-006-get-user-by-non-existent-username)
-    - [TC-USER-007: Update Own User (Valid)](#tc-user-007-update-own-user-valid)
-    - [TC-USER-008: Update Another User (Forbidden)](#tc-user-008-update-another-user-forbidden)
-    - [TC-USER-009: Update User with ID in Body (Invalid)](#tc-user-009-update-user-with-id-in-body-invalid)
-    - [TC-USER-010: Block User (Valid)](#tc-user-010-block-user-valid)
-    - [TC-USER-011: Block Non-existent User](#tc-user-011-block-non-existent-user)
-    - [TC-USER-012: Block Self](#tc-user-012-block-self)
-    - [TC-USER-013: Unblock User (Valid)](#tc-user-013-unblock-user-valid)
-    - [TC-USER-014: Unblock User Not Blocked](#tc-user-014-unblock-user-not-blocked)
-  - [PART 3: CONVERSATION APIs](#part-3-conversation-apis)
-    - [TC-CONV-001: Create DIRECT Conversation (Valid)](#tc-conv-001-create-direct-conversation-valid)
-    - [TC-CONV-002: Create Duplicate DIRECT Conversation](#tc-conv-002-create-duplicate-direct-conversation)
-    - [TC-CONV-003: Create GROUP Conversation (Valid)](#tc-conv-003-create-group-conversation-valid)
-    - [TC-CONV-004: Create GROUP with Empty Name](#tc-conv-004-create-group-with-empty-name)
-    - [TC-CONV-005: Create DIRECT with Non-existent User](#tc-conv-005-create-direct-with-non-existent-user)
-    - [TC-CONV-006: Create DIRECT with Blocked User](#tc-conv-006-create-direct-with-blocked-user)
-    - [TC-CONV-007: Get My Conversations](#tc-conv-007-get-my-conversations)
-    - [TC-CONV-008: Get Conversation by ID (Member)](#tc-conv-008-get-conversation-by-id-member)
-    - [TC-CONV-009: Get Conversation by ID (Non-member)](#tc-conv-009-get-conversation-by-id-non-member)
-    - [TC-CONV-010: Get Non-existent Conversation](#tc-conv-010-get-non-existent-conversation)
-    - [TC-CONV-011: Add Member to GROUP (Creator)](#tc-conv-011-add-member-to-group-creator)
-    - [TC-CONV-012: Add Member to GROUP (Non-creator)](#tc-conv-012-add-member-to-group-non-creator)
-    - [TC-CONV-013: Add Blocked User to GROUP](#tc-conv-013-add-blocked-user-to-group)
-    - [TC-CONV-014: Add Member to DIRECT Conversation](#tc-conv-014-add-member-to-direct-conversation)
-    - [TC-CONV-015: Remove Member from GROUP (Creator)](#tc-conv-015-remove-member-from-group-creator)
-    - [TC-CONV-016: Remove Member from GROUP (Non-creator)](#tc-conv-016-remove-member-from-group-non-creator)
-    - [TC-CONV-017: Remove Self from GROUP](#tc-conv-017-remove-self-from-group)
-  - [PART 4: MESSAGE APIs](#part-4-message-apis)
-    - [TC-MSG-001: Send Message in DIRECT (Valid)](#tc-msg-001-send-message-in-direct-valid)
-    - [TC-MSG-002: Send Message in GROUP (Valid)](#tc-msg-002-send-message-in-group-valid)
-    - [TC-MSG-003: Send Message (Non-member)](#tc-msg-003-send-message-non-member)
-    - [TC-MSG-004: Send Empty Message](#tc-msg-004-send-empty-message)
-    - [TC-MSG-005: Send Very Long Message](#tc-msg-005-send-very-long-message)
-    - [TC-MSG-006: Send Message in DIRECT (Receiver Blocked Sender)](#tc-msg-006-send-message-in-direct-receiver-blocked-sender)
-    - [TC-MSG-007: Send Message in DIRECT (Sender Blocked Receiver)](#tc-msg-007-send-message-in-direct-sender-blocked-receiver)
-    - [TC-MSG-008: Send Message in GROUP (Member Blocked Another)](#tc-msg-008-send-message-in-group-member-blocked-another)
-    - [TC-MSG-009: Send Message to Non-existent Conversation](#tc-msg-009-send-message-to-non-existent-conversation)
-    - [TC-MSG-010: Get Messages from Conversation (Member)](#tc-msg-010-get-messages-from-conversation-member)
-    - [TC-MSG-011: Get Messages (Non-member)](#tc-msg-011-get-messages-non-member)
-    - [TC-MSG-012: Get Messages with Pagination](#tc-msg-012-get-messages-with-pagination)
-    - [TC-MSG-013: Send Message with XSS Script](#tc-msg-013-send-message-with-xss-script)
-    - [TC-MSG-014: Send Message with SQL Injection](#tc-msg-014-send-message-with-sql-injection)
-  - [Test Summary](#test-summary)
-  - [Notes for Testers](#notes-for-testers)
-
-<!-- /code_chunk_output -->
-
 
 ### TC-AUTH-002: Duplicate Username Signup
 
@@ -219,18 +145,8 @@
 - **Steps:**
   1. GET /auth/signup
   2. Body: `{"username":"alice","email":"alice@test.com","password":"1234"}`
-- **Expected:** 201 Created, returns `{"username":"alice","userId":101}`
-- **Actual:** 405 Method Not Allowed, returns `{
-    "timestamp": "2026-01-08T17:31:32.671Z",
-    "status": 405,
-    "error": "Method Not Allowed", returns `{
-  "timestamp": "2026-01-08T17:31:32.671Z",
-  "status": 405,
-  "error": "Method Not Allowed",
-  "path": "/auth/signup"
-  }
-  "path": "/auth/signup"
-  }`
+- **Expected:** 405 Method Not Allowed
+- **Actual:** 405 Method Not Allowed, returns `{"timestamp":"2026-01-08T17:31:32.671Z","status":405,"error":"Method Not Allowed","path":"/auth/signup"}`
 - **Evidence:** ![Test result](Evidence/screenshot-auth-014.png)
 
 ---

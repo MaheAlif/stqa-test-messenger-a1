@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-01-08T15:50:31.543Z",
+  "baseUrl": "http://localhost:8080",
+  "users": {
+    "alice": {
+      "userId": 101,
+      "email": "alice@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.7_XiYHFvsHqXp4AY0vE05_rtBQ5Usgc8_lnjkmZ-au4"
+    },
+    "bob": {
+      "userId": 102,
+      "email": "bob@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2IiLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.3KegpA5pT8fyfp0-7F-QCoZOOwZr-Inluay457gPK4E"
+    },
+    "charlie": {
+      "userId": 103,
+      "email": "charlie@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.bYuVWwQETUlnb2fHBvkk1dV4CwhzAZ-Qe74V2UkjAAg"
+    },
+    "david": {
+      "userId": 104,
+      "email": "david@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.SJaxuI6IOml48KRF87O28kjGATo47d00EmjxEeiHgag"
+    },
+    "eve": {
+      "userId": 105,
+      "email": "eve@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJldmUiLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.o3gtuA23MiLpg29uf3yz3zvt-bjWgOpqTNepNwtExWo"
+    },
+    "frank": {
+      "userId": 106,
+      "email": "frank@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcmFuayIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.T0WhdjvbtI0nXLC-rFEgLznP-wz873A_hIuFUog-7sE"
+    },
+    "grace": {
+      "userId": 107,
+      "email": "grace@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmFjZSIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.r2eRIVA4q5V9CEPm3DeyryDR2BTx9T5tYeiBufpmlOw"
+    },
+    "henry": {
+      "userId": 108,
+      "email": "henry@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZW5yeSIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.vUJgZoqq4ouMClFC8-j2ejf4vJPnaxBRUTRRZfalQec"
+    },
+    "iris": {
+      "userId": 109,
+      "email": "iris@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcmlzIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.36kGFbjLGJ1dKxwqrt3eqmxAkYjmpqbPD1b7CgK9a-U"
+    },
+    "jack": {
+      "userId": 110,
+      "email": "jack@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNrIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.lRWZsjdU-j2DhZ-OinURv3K65_WmZ8HdmwZszf9AkDk"
+    },
+    "kate": {
+      "userId": 111,
+      "email": "kate@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRlIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.aHr4mlZrrdh6CR8aDM57-B4MYXrxOWjWrXmIN9v7Pmw"
+    },
+    "leo": {
+      "userId": 112,
+      "email": "leo@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW8iLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.Ls96aKMJeWcXiRoc6Ai0Vh6Xch5MqHBFNfg0qdu2teQ"
+    },
+    "mia": {
+      "userId": 113,
+      "email": "mia@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWEiLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.PoZi-Y0AL-ssip_7TSU4l69JqQpeV6su_pI1tdKeu88"
+    },
+    "noah": {
+      "userId": 114,
+      "email": "noah@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJub2FoIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.ryg6uxOnwfbWZtpQHCInJxc2vgD6dYnzxxV-E6HaSR8"
+    },
+    "olivia": {
+      "userId": 115,
+      "email": "olivia@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbGl2aWEiLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.IMjl27vJfldxoeXVprTCV0j8Qbuf9xwLpNN96DFEm3M"
+    },
+    "peter": {
+      "userId": 116,
+      "email": "peter@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlciIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.IL9jkSl9H6tajNu_TrbOf-7cxbcKC8zp57QZP2ioKbg"
+    },
+    "quinn": {
+      "userId": 117,
+      "email": "quinn@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWlubiIsImlhdCI6MTc2Nzg4NzQzMSwiZXhwIjoxNzY3ODkxMDMxfQ.zaYzJNqxiCjJGfLYx_Q7lETa9CTKParX0Py-Rs8bFMs"
+    },
+    "rachel": {
+      "userId": 118,
+      "email": "rachel@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNoZWwiLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.n23Galu1XS7ybbSf3L-3KwQ8uCearBQM3AqFBugm1vg"
+    },
+    "sam": {
+      "userId": 119,
+      "email": "sam@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW0iLCJpYXQiOjE3Njc4ODc0MzEsImV4cCI6MTc2Nzg5MTAzMX0.VXIfwHBAj7nr6adWYq989IM6wgRXz5QE8tJ-BbUV_8A"
+    },
+    "tina": {
+      "userId": 120,
+      "email": "tina@test.com",
+      "password": "password123",
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aW5hIiwiaWF0IjoxNzY3ODg3NDMxLCJleHAiOjE3Njc4OTEwMzF9.l29A2AKQdIhvexJ1QlRm-tHpYBGRszRiuMYXVk7N02A"
+    }
+  }
+}
