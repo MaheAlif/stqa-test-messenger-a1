@@ -2,9 +2,9 @@
 
 ## Test Case Template
 
-| Test ID | Title | Pre-conditions | Steps | Expected Result | Actual Result | Status | Evidence | Pass/Fail |
-| ------- | ----- | -------------- | ----- | --------------- | ------------- | ------ | -------- | --------- |
-| TC-AUTH-001 | Valid User Signup | None | POST /auth/signup with body | `{"username":"mahe","userId":124}` | `{"username":"Mahe","userId":124}` | Completed | [Link](Evidence/screenshot-auth-001.png) | Pass |
+| Test ID     | Title             | Pre-conditions | Steps                       | Expected Result                    | Actual Result                      | Status    | Evidence                                 | Pass/Fail |
+| ----------- | ----------------- | -------------- | --------------------------- | ---------------------------------- | ---------------------------------- | --------- | ---------------------------------------- | --------- |
+| TC-AUTH-001 | Valid User Signup | None           | POST /auth/signup with body | `{"username":"mahe","userId":124}` | `{"username":"Mahe","userId":124}` | Completed | [Link](Evidence/screenshot-auth-001.png) | Pass      |
 
 ---
 
@@ -312,8 +312,12 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"DIRECT","name":null,"memberIds":[102]}`
 - **Expected:** 200 OK, returns conversationId
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-001.png
+- **Actual:** 200 OK, returns `{
+    "type": "DIRECT",
+    "name": null,
+    "conversationId": 203
+}`
+- **Evidence:** [test result](Evidence/TC-CONV-001.png)
 
 ### TC-CONV-002: Create Duplicate DIRECT Conversation
 
@@ -372,13 +376,29 @@
 
 ### TC-CONV-007: Get My Conversations
 
-- **Pre-conditions:** Alice has 2 conversations, logged in
+- **Pre-conditions:** Alice has 3 conversations, logged in
 - **Steps:**
   1. GET /conversations/get
   2. Header: `Authorization: Bearer <alice_token>`
-- **Expected:** 200 OK, returns array with 2 conversations
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-007.png
+- **Expected:** 200 OK, returns array with 3 conversations
+- **Actual:** 200 OK, returns `[
+    {
+        "type": "DIRECT",
+        "name": null,
+        "conversationId": 201
+    },
+    {
+        "type": "GROUP",
+        "name": "Test Group",
+        "conversationId": 202
+    },
+    {
+        "type": "DIRECT",
+        "name": null,
+        "conversationId": 203
+    }
+]`
+- **Evidence:** [Test result](Evidence/TC-CONV-007.png)
 
 ### TC-CONV-008: Get Conversation by ID (Member)
 
