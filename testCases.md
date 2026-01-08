@@ -4,6 +4,7 @@
 
 | Test ID | Title | Pre-conditions | Steps | Expected Result | Actual Result | Status | Evidence | Pass/Fail |
 | ------- | ----- | -------------- | ----- | --------------- | ------------- | ------ | -------- | --------- |
+| TC-AUTH-001 | Valid User Signup | None | POST /auth/signup with body | `{"username":"mahe","userId":124}` | `{"username":"Mahe","userId":124}` | Completed | [Link](Evidence/screenshot-auth-001.png) | Pass |
 
 ---
 
@@ -14,11 +15,13 @@
 - **Pre-conditions:** None
 - **Steps:**
   1. POST /auth/signup
-  2. Body: `{"username":"alice","email":"alice@test.com","password":"1234"}`
-- **Expected:** 201 Created, returns `{"username":"alice","userId":101}`
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-auth-001.png
-
+  2. Body: `{"username":"mahe","email":"mahe@test.com","password":"1234"}`
+- **Expected:** 201 Created, returns `{"username":"mahe","userId":124}`
+- **Actual:** 201 Created, returns `{
+    "username": "Mahe",
+    "userId": 124
+}`
+- **Evidence:** ![Test result](Evidence/screenshot-auth-001.png)
 
 ### TC-AUTH-002: Duplicate Username Signup
 
@@ -27,8 +30,9 @@
   1. POST /auth/signup
   2. Body: `{"username":"alice","email":"alice2@test.com","password":"1234"}`
 - **Expected:** 400 Bad Request, "Username already taken"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-auth-002.png
+- **Actual:** 400 Bad Request, returns `{Username already taken}`
+
+- **Evidence:** ![Test result](Evidence/screenshot-auth-002.png)
 
 ### TC-AUTH-003: Signup with Empty Username
 
