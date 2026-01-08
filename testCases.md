@@ -257,8 +257,11 @@
   1. PATCH /users/block/102
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK, "User blocked successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-010.png
+- **Actual:** 200 OK, returns `{
+    "message": "User blocked successfully",
+    "data": null
+}`
+- **Evidence:** ![TC-USER-010](Evidence/TC-USER-010.png)
 
 ### TC-USER-011: Block Non-existent User
 
@@ -317,7 +320,7 @@
     "name": null,
     "conversationId": 203
 }`
-- **Evidence:** [test result](Evidence/TC-CONV-001.png)
+- **Evidence:** ![test result](Evidence/TC-CONV-001.png)
 
 ### TC-CONV-002: Create Duplicate DIRECT Conversation
 
@@ -327,8 +330,13 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"DIRECT","name":null,"memberIds":[102]}`
 - **Expected:** 400 Bad Request or returns existing conversation (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-002.png
+- **Actual:** 400 Bad Request, returns `{
+    "timestamp": "2026-01-08T19:41:38.067Z",
+    "status": 400,
+    "error": "Bad Request",
+    "path": "/conversations/create"
+}`
+- **Evidence:** ![TC-CONV-002](Evidence/TC-CONV-002.png)
 
 ### TC-CONV-003: Create GROUP Conversation (Valid)
 
@@ -338,8 +346,12 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"GROUP","name":"Test Group","memberIds":[102,103]}`
 - **Expected:** 200 OK, returns conversationId, alice auto-included
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-003.png
+- **Actual:** 200 OK, returns `{
+    "type": "GROUP",
+    "name": "Friends Forever !!!",
+    "conversationId": 204
+}`
+- **Evidence:** ![TC-CONV-003](Evidence/TC-CONV-003.png)
 
 ### TC-CONV-004: Create GROUP with Empty Name
 
@@ -349,8 +361,13 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"GROUP","name":"","memberIds":[102]}`
 - **Expected:** 400 Bad Request or accepts empty name (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-004.png
+- **Actual:** 200 OK, returns `{
+    "type": "GROUP",
+    "name": "",
+    "conversationId": 206
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![Defect-CONV-002](Evidence/TC-CONV-004.png)
 
 ### TC-CONV-005: Create DIRECT with Non-existent User
 
@@ -360,8 +377,13 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"DIRECT","name":null,"memberIds":[999]}`
 - **Expected:** 400 Bad Request, "User not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-005.png
+- **Actual:** 200 OK, returns `{
+    "type": "DIRECT",
+    "name": null,
+    "conversationId": 207
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![TC-CONV-005](Evidence/TC-CONV-005.png)
 
 ### TC-CONV-006: Create DIRECT with Blocked User
 
@@ -371,8 +393,13 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"type":"DIRECT","name":null,"memberIds":[102]}`
 - **Expected:** 400 Bad Request, cannot create conversation with blocked user
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-006.png
+- **Actual:** 200 OK, returns `{
+    "type": "DIRECT",
+    "name": null,
+    "conversationId": 208
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![TC-CONV-006](Evidence/TC-CONV-006.png)
 
 ### TC-CONV-007: Get My Conversations
 
@@ -398,7 +425,7 @@
         "conversationId": 203
     }
 ]`
-- **Evidence:** [Test result](Evidence/TC-CONV-007.png)
+- **Evidence:** ![Test result](Evidence/TC-CONV-007.png)
 
 ### TC-CONV-008: Get Conversation by ID (Member)
 
