@@ -1,0 +1,104 @@
+{
+  "users": [
+    {
+      "username": "alice",
+      "email": "alice@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "bob",
+      "email": "bob@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "charlie",
+      "email": "charlie@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "david",
+      "email": "david@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "eve",
+      "email": "eve@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "frank",
+      "email": "frank@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "grace",
+      "email": "grace@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "henry",
+      "email": "henry@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "iris",
+      "email": "iris@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "jack",
+      "email": "jack@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "kate",
+      "email": "kate@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "leo",
+      "email": "leo@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "mia",
+      "email": "mia@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "noah",
+      "email": "noah@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "olivia",
+      "email": "olivia@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "peter",
+      "email": "peter@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "quinn",
+      "email": "quinn@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "rachel",
+      "email": "rachel@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "sam",
+      "email": "sam@test.com",
+      "password": "password123"
+    },
+    {
+      "username": "tina",
+      "email": "tina@test.com",
+      "password": "password123"
+    }
+  ]
+}
