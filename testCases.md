@@ -542,56 +542,170 @@
 
 - **Pre-conditions:** DIRECT conversation 201 between alice and bob, alice logged in
 - **Steps:**
-  1. POST /messages/201/send
-  2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
-  3. Body: `Hello Bob!`
+    1. POST /messages/201/send
+    2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
+    3. Body: `Hello Bob!`
 - **Expected:** 200 OK, "Message sent successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-001.png
+- **Actual:** 200 OK, returns `{
+  "message": "Message sent successfully",
+  "data": [
+  {
+  "id": 1001,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Hello Bob! কি অবস্থা ভাই !!! ",
+  "timestamp": 1767974142471
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-001](Evidence/TC-MSG-001.png)
 
 ### TC-MSG-002: Send Message in GROUP (Valid)
 
 - **Pre-conditions:** GROUP conversation 202, alice is member
 - **Steps:**
-  1. POST /messages/202/send
-  2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
-  3. Body: `Hello everyone!`
+    1. POST /messages/202/send
+    2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
+    3. Body: `Hello everyone!`
 - **Expected:** 200 OK, "Message sent successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-002.png
+- **Actual:** 200 OK, returns `{
+  "message": "Message sent successfully",
+  "data": [
+  {
+  "id": 1008,
+  "conversationId": 202,
+  "senderId": 101,
+  "content": "Hello everyone! Welcome to the test group.",
+  "timestamp": 1767974377481
+  },
+  {
+  "id": 1009,
+  "conversationId": 202,
+  "senderId": 102,
+  "content": "Thanks Alice! Happy to be here.",
+  "timestamp": 1767974377490
+  },
+  {
+  "id": 1010,
+  "conversationId": 202,
+  "senderId": 103,
+  "content": "Hi team!",
+  "timestamp": 1767974377497
+  },
+  {
+  "id": 1014,
+  "conversationId": 202,
+  "senderId": 101,
+  "content": "Hello everyone! কেমন আছো সবাই ? ",
+  "timestamp": 1767974525076
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-002](Evidence/TC-MSG-002.png)
 
 ### TC-MSG-003: Send Message (Non-member)
 
-- **Pre-conditions:** Conversation 202 exists, alice is NOT member
+- **Pre-conditions:** Conversation 202 exists, eve(105) is NOT member
 - **Steps:**
-  1. POST /messages/202/send
-  2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
-  3. Body: `Trying to hack in`
+    1. POST /messages/202/send
+    2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
+    3. Body: `Trying to hack in`
 - **Expected:** 400 Bad Request, "User is not a member of this conversation"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-003.png
+- **Actual:** 400 Bad Request, returns `{
+  "message": "User is not a member of this conversation",
+  "data": null
+  }`
+- **Evidence:** ![TC-MSG-003](Evidence/TC-MSG-003.png)
 
 ### TC-MSG-004: Send Empty Message
 
 - **Pre-conditions:** DIRECT conversation 201, alice is member
 - **Steps:**
-  1. POST /messages/201/send
-  2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
-  3. Body: ``
+    1. POST /messages/201/send
+    2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
+    3. Body: ``
 - **Expected:** 400 Bad Request or accepts empty (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-004.png
+- **Actual:** 200 OK, returns ``
+- **Verdict:** It's a **Defect**
+- **Evidence:** ![TC-MSG-004](Evidence/TC-MSG-004.png)
 
 ### TC-MSG-005: Send Very Long Message
 
 - **Pre-conditions:** DIRECT conversation 201, alice is member
 - **Steps:**
-  1. POST /messages/201/send
-  2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
-  3. Body: `[10000 characters string]`
+    1. POST /messages/201/send
+    2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
+    3. Body: `[10000 characters string]`
 - **Expected:** 200 OK or 400 if length limit (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-005.png
+- **Actual:** 200 OK, returns `{
+  "message": "Message sent successfully",
+  "data": [
+  {
+  "id": 1001,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Hello Bob! This is a test message.",
+  "timestamp": 1767974377414
+  },
+  {
+  "id": 1002,
+  "conversationId": 201,
+  "senderId": 102,
+  "content": "Hi Alice! Got your message.",
+  "timestamp": 1767974377421
+  },
+  {
+  "id": 1003,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 1 from Alice",
+  "timestamp": 1767974377432
+  },
+  {
+  "id": 1004,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 2 from Alice",
+  "timestamp": 1767974377443
+  },
+  {
+  "id": 1005,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 3 from Alice",
+  "timestamp": 1767974377453
+  },
+  {
+  "id": 1006,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 4 from Alice",
+  "timestamp": 1767974377462
+  },
+  {
+  "id": 1007,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 5 from Alice",
+  "timestamp": 1767974377472
+  },
+  {
+  "id": 1016,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "   ",
+  "timestamp": 1767975287537
+  },
+  {
+  "id": 1017,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "1 million unsorted numbers!",
+  "timestamp": 1767975599697
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-005](Evidence/TC-MSG-005.png)
 
 ### TC-MSG-006: Send Message in DIRECT (Receiver Blocked Sender)
 
