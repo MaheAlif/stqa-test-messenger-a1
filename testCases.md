@@ -715,8 +715,13 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `Can you see this?`
 - **Expected:** 400 Bad Request, "You must unblock the user to send messages"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-006.png
+- **Actual:** 400 Bad Request, returns `{
+  "timestamp": "2026-01-10T13:20:26.716Z",
+  "status": 405,
+  "error": "Method Not Allowed",
+  "path": "/messages/201/send"
+  }`
+- **Evidence:** ![TC-MSG-006](Evidence/TC-MSG-006.png)
 
 ### TC-MSG-007: Send Message in DIRECT (Sender Blocked Receiver)
 
@@ -726,8 +731,11 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `You're blocked!`
 - **Expected:** 400 Bad Request, "You cannot send message to this conversation"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-007.png
+- **Actual:** 400 bad Request, returns `{
+  "message": "You must unblock the user to send messages",
+  "data": null
+  }`
+- **Evidence:** ![TC-MSG-007](Evidence/TC-MSG-007.png)
 
 ### TC-MSG-008: Send Message in GROUP (Member Blocked Another)
 
@@ -737,8 +745,47 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `Hello group!`
 - **Expected:** 200 OK (blocking doesn't affect GROUP per spec)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-008.png
+- **Actual:** 200 OK, returns `{
+  "message": "Message sent successfully",
+  "data": [
+  {
+  "id": 1008,
+  "conversationId": 202,
+  "senderId": 101,
+  "content": "Hello everyone! Welcome to the test group.",
+  "timestamp": 1768051377823
+  },
+  {
+  "id": 1009,
+  "conversationId": 202,
+  "senderId": 102,
+  "content": "Thanks Alice! Happy to be here.",
+  "timestamp": 1768051377830
+  },
+  {
+  "id": 1010,
+  "conversationId": 202,
+  "senderId": 103,
+  "content": "Hi team! 👋",
+  "timestamp": 1768051377836
+  },
+  {
+  "id": 1014,
+  "conversationId": 202,
+  "senderId": 101,
+  "content": "Hello group! Bob are you there !!! ",
+  "timestamp": 1768051700889
+  },
+  {
+  "id": 1015,
+  "conversationId": 202,
+  "senderId": 101,
+  "content": "Hello group!",
+  "timestamp": 1768051777607
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-008](Evidence/TC-MSG-008.png)
 
 ### TC-MSG-009: Send Message to Non-existent Conversation
 
@@ -748,8 +795,11 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `Ghost message`
 - **Expected:** 400 Bad Request, "Conversation not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-009.png
+- **Actual:** 400 Bad Request, returns `{
+  "message": "Conversation not found",
+  "data": null
+  }`
+- **Evidence:** ![TC-MSG-009](Evidence/TC-MSG-009.png)
 
 ### TC-MSG-010: Get Messages from Conversation (Member)
 
@@ -758,28 +808,137 @@
   1. GET /messages/201/get?page=0&size=20
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK, returns array of 5 messages
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-010.png
+- **Actual:** 200 OK, returns `{
+  "message": "Messages retrieved successfully",
+  "data": [
+  {
+  "id": 1001,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Hello Bob! This is a test message.",
+  "timestamp": 1768051377772
+  },
+  {
+  "id": 1002,
+  "conversationId": 201,
+  "senderId": 102,
+  "content": "Hi Alice! Got your message.",
+  "timestamp": 1768051377780
+  },
+  {
+  "id": 1003,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 1 from Alice",
+  "timestamp": 1768051377789
+  },
+  {
+  "id": 1004,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 2 from Alice",
+  "timestamp": 1768051377795
+  },
+  {
+  "id": 1005,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 3 from Alice",
+  "timestamp": 1768051377803
+  },
+  {
+  "id": 1006,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 4 from Alice",
+  "timestamp": 1768051377810
+  },
+  {
+  "id": 1007,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 5 from Alice",
+  "timestamp": 1768051377816
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-010](Evidence/TC-MSG-010.png)
 
 ### TC-MSG-011: Get Messages (Non-member)
 
-- **Pre-conditions:** Conversation 202 exists, alice is NOT member
+- **Pre-conditions:** Conversation 203 exists, alice is NOT member
 - **Steps:**
   1. GET /messages/202/get?page=0&size=20
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request, "Cannot access messages for this conversation"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-011.png
+- **Actual:** 400 bad Request, returns `{
+  "message": "Cannot access messages for this conversation: User is not a member of this conversation",
+  "data": null
+  }`
+- **Evidence:** ![TC-MSG-011](Evidence/TC-MSG-011.png)
 
 ### TC-MSG-012: Get Messages with Pagination
 
-- **Pre-conditions:** Conversation 201 with 50 messages, alice is member
+- **Pre-conditions:** Conversation 201 with 7 messages, alice is member
 - **Steps:**
   1. GET /messages/201/get?page=1&size=10
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK (note: pagination may not work per Documentation)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-012.png
+- **Actual:** 200 OK, returns `{
+  "message": "Messages retrieved successfully",
+  "data": [
+  {
+  "id": 1001,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Hello Bob! This is a test message.",
+  "timestamp": 1768051377772
+  },
+  {
+  "id": 1002,
+  "conversationId": 201,
+  "senderId": 102,
+  "content": "Hi Alice! Got your message.",
+  "timestamp": 1768051377780
+  },
+  {
+  "id": 1003,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 1 from Alice",
+  "timestamp": 1768051377789
+  },
+  {
+  "id": 1004,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 2 from Alice",
+  "timestamp": 1768051377795
+  },
+  {
+  "id": 1005,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 3 from Alice",
+  "timestamp": 1768051377803
+  },
+  {
+  "id": 1006,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 4 from Alice",
+  "timestamp": 1768051377810
+  },
+  {
+  "id": 1007,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 5 from Alice",
+  "timestamp": 1768051377816
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-012](Evidence/TC-MSG-012.png)
 
 ### TC-MSG-013: Send Message with XSS Script
 
@@ -789,8 +948,13 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `<script>alert('XSS')</script>`
 - **Expected:** 200 OK (stored, but should be escaped on display)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-013.png
+- **Actual:** 500 Internal Server Error, returns `{
+  "timestamp": "2026-01-10T13:58:07.095Z",
+  "status": 500,
+  "error": "Internal Server Error",
+  "path": "/messages/201/send"
+  }`
+- **Evidence:** ![TC-MSG-013](Evidence/TC-MSG-013.png)
 
 ### TC-MSG-014: Send Message with SQL Injection
 
@@ -800,8 +964,75 @@
   2. Header: `Authorization: Bearer <alice_token>`, `Content-Type: text/plain`
   3. Body: `'; DROP TABLE messages; --`
 - **Expected:** 200 OK (treated as plain text)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-msg-014.png
+- **Actual:** 200 OK, returns `{
+  "message": "Message sent successfully",
+  "data": [
+  {
+  "id": 1001,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Hello Bob! This is a test message.",
+  "timestamp": 1768053656454
+  },
+  {
+  "id": 1002,
+  "conversationId": 201,
+  "senderId": 102,
+  "content": "Hi Alice! Got your message.",
+  "timestamp": 1768053656462
+  },
+  {
+  "id": 1003,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 1 from Alice",
+  "timestamp": 1768053656470
+  },
+  {
+  "id": 1004,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 2 from Alice",
+  "timestamp": 1768053656477
+  },
+  {
+  "id": 1005,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 3 from Alice",
+  "timestamp": 1768053656484
+  },
+  {
+  "id": 1006,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 4 from Alice",
+  "timestamp": 1768053656492
+  },
+  {
+  "id": 1007,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "Message 5 from Alice",
+  "timestamp": 1768053656499
+  },
+  {
+  "id": 1014,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "<script>alert('XSS')</script>",
+  "timestamp": 1768053660147
+  },
+  {
+  "id": 1015,
+  "conversationId": 201,
+  "senderId": 101,
+  "content": "'; DROP TABLE messages; --",
+  "timestamp": 1768053719257
+  }
+  ]
+  }`
+- **Evidence:** ![TC-MSG-014](Evidence/TC-MSG-014.png)
 
 ---
 
