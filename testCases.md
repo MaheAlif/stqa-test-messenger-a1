@@ -434,18 +434,22 @@
   1. GET /conversations/201
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK, returns conversation details
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-008.png
+- **Actual:** 200 OK, returns `{
+    "type": "DIRECT",
+    "name": null,
+    "conversationId": 201
+}`
+- **Evidence:** ![TC-CONV-008](Evidence/TC-CONV-008.png)
 
 ### TC-CONV-009: Get Conversation by ID (Non-member)
 
-- **Pre-conditions:** Conversation 202 exists, alice is NOT member
+- **Pre-conditions:** Conversation 204 exists(between Eve and Frank), alice is NOT member
 - **Steps:**
-  1. GET /conversations/202
+  1. GET /conversations/204
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request, "User is not a member of this conversation"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-009.png
+- **Actual:** 400 Bad Request, returns `"User is not a member of this conversation"`
+- **Evidence:** ![TC-CONV-009](Evidence/TC-CONV-009.png)
 
 ### TC-CONV-010: Get Non-existent Conversation
 
@@ -454,8 +458,8 @@
   1. GET /conversations/999
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request, "Conversation not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-010.png
+- **Actual:** 400 Bad Request, returns `"Conversation not found"`
+- **Evidence:** ![TC-CONV-010](Evidence/TC-CONV-010.png)
 
 ### TC-CONV-011: Add Member to GROUP (Creator)
 
@@ -465,8 +469,17 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"conversationId":202,"members":[104]}`
 - **Expected:** 200 OK, "Members added successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-011.png
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 202,
+    "memberIds": [
+        101,
+        102,
+        103,
+        104
+    ]
+}`
+- **Evidence:** ![TC-CONV-011](Evidence/TC-CONV-011.png)
 
 ### TC-CONV-012: Add Member to GROUP (Non-creator)
 
@@ -476,30 +489,59 @@
   2. Header: `Authorization: Bearer <bob_token>`
   3. Body: `{"conversationId":202,"members":[104]}`
 - **Expected:** 400 Bad Request, only creator can add (per spec)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-012.png
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 202,
+    "memberIds": [
+        101,
+        102,
+        103,
+        104
+    ]
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![TC-CONV-012](Evidence/TC-CONV-012.png)
 
 ### TC-CONV-013: Add Blocked User to GROUP
 
-- **Pre-conditions:** GROUP 202 exists, alice is creator, alice blocked charlie (103)
+- **Pre-conditions:** GROUP 202 exists, alice is creator, alice blocked jack(110)
 - **Steps:**
   1. POST /conversations/addMember
   2. Header: `Authorization: Bearer <alice_token>`
-  3. Body: `{"conversationId":202,"members":[103]}`
+  3. Body: `{"conversationId":202,"members":[110]}`
 - **Expected:** 400 Bad Request, cannot add blocked user
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-013.png
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 202,
+    "memberIds": [
+        101,
+        102,
+        103,
+        104,
+        110
+    ]
+}`
+- **Evidence:** ![TC-CONV-013](Evidence/TC-CONV-013.png)
 
 ### TC-CONV-014: Add Member to DIRECT Conversation
 
-- **Pre-conditions:** DIRECT conversation 201 between alice and bob
+- **Pre-conditions:** DIRECT conversation 201 between alice and bob exists, add jack (110)
 - **Steps:**
   1. POST /conversations/addMember
   2. Header: `Authorization: Bearer <alice_token>`
-  3. Body: `{"conversationId":201,"members":[103]}`
+  3. Body: `{"conversationId":201,"members":[110]}`
 - **Expected:** 400 Bad Request, cannot add to DIRECT (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-014.png
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 201,
+    "memberIds": [
+        101,
+        102,
+        103,
+        110
+    ]
+}`
+- **Evidence:** ![TC-CONV-014](Evidence/TC-CONV-014.png)
 
 ### TC-CONV-015: Remove Member from GROUP (Creator)
 
@@ -509,30 +551,72 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"conversationId":202,"members":[102]}`
 - **Expected:** 200 OK, "Member removed successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-015.png
+- **Actual:** 200 OK, returns `{
+    "message": "Member removed successfully",
+    "conversationId": 202,
+    "memberIds": [
+        101,
+        103,
+        104,
+        110
+    ]
+}`
+- **Evidence:** ![TC-CONV-015](Evidence/TC-CONV-015.png)
 
 ### TC-CONV-016: Remove Member from GROUP (Non-creator)
 
-- **Pre-conditions:** GROUP 202 exists, alice is creator, bob is member
+- **Pre-conditions:** GROUP 202 exists, alice(101) is creator, bob(102) is member
 - **Steps:**
   1. POST /conversations/removeMember
   2. Header: `Authorization: Bearer <bob_token>`
   3. Body: `{"conversationId":202,"members":[103]}`
 - **Expected:** 400 Bad Request, only creator can remove
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-016.png
+- **Actual:** 500 Internal Server Error, returns `{
+    "timestamp": "2026-01-09T15:28:50.778Z",
+    "status": 500,
+    "error": "Internal Server Error",
+    "path": "/conversations/removeMember"
+}`
+- **Evidence:** ![TC-CONV-016](Evidence/TC-CONV-016.png)
 
 ### TC-CONV-017: Remove Self from GROUP
 
-- **Pre-conditions:** GROUP 202 exists, bob is member
+- **Pre-conditions:** GROUP 201 exists, bob(102) is a member
 - **Steps:**
   1. POST /conversations/removeMember
   2. Header: `Authorization: Bearer <bob_token>`
-  3. Body: `{"conversationId":202,"members":[102]}`
+  3. Body: `{"conversationId":201,"members":[102]}`
 - **Expected:** 200 OK or 400 (test to see - can user leave group?)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-conv-017.png
+- **Actual:** 200 OK, returns `{
+    "message": "Member removed successfully",
+    "conversationId": 201,
+    "memberIds": [
+        101,
+        103,
+        110
+    ]
+}`
+- **Evidence:** ![TC-CONV-017](Evidence/TC-CONV-017.png)
+
+### TC-CONV-018: Add a third Member (charlie - 103) to DIRECT Conversation, between Alice (101) and Bob (102)
+
+- **Pre-conditions:** DIRECT conversation 201 between alice and bob
+- **Steps:**
+  1. POST /conversations/addMember
+  2. Header: `Authorization: Bearer <alice_token>`
+  3. Body: `{"conversationId":201,"members":[103]}`
+- **Expected:** 400 Bad Request, cannot add to DIRECT (test to see)
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 201,
+    "memberIds": [
+        101,
+        102,
+        103
+    ]
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![TC-CONV-018](Evidence/TC-CONV-018.png)
 
 ---
 
@@ -553,7 +637,7 @@
   "id": 1001,
   "conversationId": 201,
   "senderId": 101,
-  "content": "Hello Bob! কি অবস্থা ভাই !!! ",
+  "content": "Hello Bob! αªòαª┐ αªàαª¼αª╕αºìαªÑαª╛ αª¡αª╛αªç !!! ",
   "timestamp": 1767974142471
   }
   ]
@@ -596,7 +680,7 @@
   "id": 1014,
   "conversationId": 202,
   "senderId": 101,
-  "content": "Hello everyone! কেমন আছো সবাই ? ",
+  "content": "Hello everyone! αªòαºçαª«αª¿ αªåαª¢αºï αª╕αª¼αª╛αªç ? ",
   "timestamp": 1767974525076
   }
   ]
