@@ -164,8 +164,39 @@
   1. GET /users/
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK, returns array of users
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-001.png
+- **Actual:** 200 OK, rerunes `[
+    {
+        "username": "alice",
+        "email": null,
+        "password": null,
+        "userId": 101
+    },
+    {
+        "username": "bob",
+        "email": null,
+        "password": null,
+        "userId": 102
+    },
+    {
+        "username": "charlie",
+        "email": null,
+        "password": null,
+        "userId": 103
+    },
+    {
+        "username": "david",
+        "email": null,
+        "password": null,
+        "userId": 104
+    },
+    {
+        "username": "eve",
+        "email": null,
+        "password": null,
+        "userId": 105
+    }
+]`
+- **Evidence:** ![TC-USER-001](Evidence/TC-USER-001.png)
 
 ### TC-USER-002: Get All Users (Unauthorized)
 
@@ -174,8 +205,8 @@
   1. GET /users/
   2. No Authorization header
 - **Expected:** 401 Unauthorized
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-002.png
+- **Actual:** 401 Unauthorized, returns `You must be logged in to view users`
+- **Evidence:** ![TC-USER-002](Evidence/TC-USER-002.png)
 
 ### TC-USER-003: Get User by Valid ID
 
@@ -184,8 +215,13 @@
   1. GET /users/101
   2. Header: `Authorization: Bearer <token>`
 - **Expected:** 200 OK, returns alice's user object
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-003.png
+- **Actual:** 200 OK, returns `{
+    "username": "alice",
+    "email": "alice@test.com",
+    "password": "password123",
+    "userId": 101
+}`
+- **Evidence:** ![TC-USER-003](Evidence/TC-USER-003.png)
 
 ### TC-USER-004: Get User by Invalid ID
 
@@ -194,8 +230,8 @@
   1. GET /users/999
   2. Header: `Authorization: Bearer <token>`
 - **Expected:** 404 Not Found, "User not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-004.png
+- **Actual:** 404 Not Found, returns `User not found`
+- **Evidence:** ![TC-USER-004](Evidence/TC-USER-004.png)
 
 ### TC-USER-005: Get User by Valid Username
 
@@ -204,8 +240,13 @@
   1. GET /users/username/alice
   2. Header: `Authorization: Bearer <token>`
 - **Expected:** 200 OK, returns alice's user object
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-005.png
+- **Actual:** 200 OK, returns `{
+    "username": "alice",
+    "email": "alice@test.com",
+    "password": "password123",
+    "userId": 101
+}`
+- **Evidence:** ![TC-USER-005](Evidence/TC-USER-005.png)
 
 ### TC-USER-006: Get User by Non-existent Username
 
@@ -214,8 +255,8 @@
   1. GET /users/username/nobody
   2. Header: `Authorization: Bearer <token>`
 - **Expected:** 404 Not Found, "User not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-006.png
+- **Actual:** 404 Not Found, returns `User not found`
+- **Evidence:** ![TC-USER-006](Evidence/TC-USER-006.png)
 
 ### TC-USER-007: Update Own User (Valid)
 
@@ -225,8 +266,16 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"email":"newemail@test.com"}`
 - **Expected:** 200 OK, user updated successfully
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-007.png
+- **Actual:** 200 OK, returns `{
+    "message": "User updated successfully",
+    "data": {
+        "username": "alice",
+        "email": "newemail@test.com",
+        "password": "password123",
+        "userId": 101
+    }
+}`
+- **Evidence:** ![TC-USER-007](Evidence/TC-USER-007.png)
 
 ### TC-USER-008: Update Another User (Forbidden)
 
@@ -236,8 +285,8 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"email":"hacked@test.com"}`
 - **Expected:** 403 Forbidden, "You can only update your own user details"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-008.png
+- **Actual:** 403 Forbidden, retunrs `You can only update your own user details`
+- **Evidence:** ![TC-USER-008](Evidence/TC-USER-008.png)
 
 ### TC-USER-009: Update User with ID in Body (Invalid)
 
@@ -247,8 +296,17 @@
   2. Header: `Authorization: Bearer <alice_token>`
   3. Body: `{"userId":999,"email":"test@test.com"}`
 - **Expected:** 400 Bad Request, "User ID cannot be updated"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-009.png
+- **Actual:** 200 OK, returns `{
+    "message": "User updated successfully",
+    "data": {
+        "username": "alice",
+        "email": "test@test.com",
+        "password": "password123",
+        "userId": 101
+    }
+}`
+- **Verdict:** It is a **Defect**
+- **Evidence:** ![TC-USER-009](Evidence/TC-USER-009.png)
 
 ### TC-USER-010: Block User (Valid)
 
@@ -270,8 +328,8 @@
   1. PATCH /users/block/999
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request, "User to be blocked not found"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-011.png
+- **Actual:** 400 Bad Request, returns `User to be blocked not found`
+- **Evidence:** ![TC-USER-011](Evidence/TC-USER-011.png)
 
 ### TC-USER-012: Block Self
 
@@ -280,8 +338,12 @@
   1. PATCH /users/block/101
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request (or accepts - test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-012.png
+- **Actual:** 200 OK, returns `{
+    "message": "User blocked successfully",
+    "data": null
+}`
+- **Verdict:** It is a **Defect**
+- **Evidence:** ![TC-USER-012](Evidence/TC-USER-012.png)
 
 ### TC-USER-013: Unblock User (Valid)
 
@@ -290,8 +352,11 @@
   1. DELETE /users/block/102
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 200 OK, "User unblocked successfully"
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-013.png
+- **Actual:** 200 OK, returns `{
+    "message": "User unblocked successfully",
+    "data": null
+}`
+- **Evidence:** ![TC-USER-013](Evidence/TC-USER-013.png)
 
 ### TC-USER-014: Unblock User Not Blocked
 
@@ -300,9 +365,8 @@
   1. DELETE /users/block/102
   2. Header: `Authorization: Bearer <alice_token>`
 - **Expected:** 400 Bad Request or 200 OK (test to see)
-- **Actual:** _[To be filled during testing]_
-- **Evidence:** screenshot-user-014.png
-
+- **Actual:** 400 Bad Request, returns `Failed to unblock user`
+- **Evidence:** ![TC-USER-014](Evidence/TC-USER-014.png)
 ---
 
 ## PART 3: CONVERSATION APIs
