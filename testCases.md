@@ -3,11 +3,11 @@
 
 | Category      | Test Cases Count  |
 | ------------- | ----------------- |
-| Auth          | 13                |
+| Auth          | 40                |
 | Users         | 14                |
 | Conversations | 18                |
 | Messages      | 14                |
-| **TOTAL**     | **59 Test Cases** |
+| **TOTAL**     | **86 Test Cases** |
 
 
 ## Test Case Table
