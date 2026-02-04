@@ -1,0 +1,1305 @@
+**TC-AUTH-4.1 : Access Protected API with Valid Token**
+
+**Pre-condition:**  
+User "alice" is logged in and has a valid JWT token
+
+**Steps:**
+
+- GET /auth/test
+- Header:
+
+Authorization: Bearer &lt;VALID_JWT_TOKEN_101&gt;
+
+**Expected:**  
+200 OK,  
+Hello, alice! This is a protected API.
+
+**ACTUAL:**  
+failed Status code is 200 | AssertionError: expected response to have status code 200 but got 405
+
+**Evidence:**  
+Status: failedStatus code is 200 | AssertionError: expected response to have status code 200 but got 405
+
+**TC-AUTH-042 : Access Protected API Without Token**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- GET /auth/test
+- No- Authorization , header
+
+**Expected:**  
+403 Forbidden
+
+**ACTUAL:**  
+Forbidden
+
+**Evidence:**  
+Status: Passed (access denied)
+
+**TC-AUTH-4.3 : Access Protected API with Empty Token**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- GET /auth/test
+- Header:
+
+Authorization: Bearer
+
+**Expected:**  
+403 Forbidden
+
+**ACTUAL:** Forbidden
+
+**Evidence:**  
+Status: PASSED
+
+**TC-AUTH-044 : Access Protected API with Invalid Token**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- GET /auth/test
+- Header:
+
+Authorization: Bearer INVALID_TOKEN_123
+
+**Expected:**  
+403 Forbidden
+
+**ACTUAL:** Forbidden
+
+**Evidence:**  
+Status: PASSED
+
+**TC-AUTH-048 : Access Protected API Using POST Method**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- POST /auth/test
+- Header:
+
+Authorization: Bearer &lt;VALID_JWT_TOKEN_101&gt;
+
+**Expected:** 403 Forbidden  
+
+**ACTUAL:** Forbidden
+
+**Evidence:**  
+Status : passed
+
+**TC-AUTH-049 : Access Protected API After Logout**
+
+**Pre-condition:**  
+User "alice" was logged in and then logged out
+
+**Steps:**
+
+- GET /auth/test
+- Header:
+
+Authorization: Bearer &lt;OLD_JWT_TOKEN&gt;
+
+**Expected:**  
+403 Forbidden
+
+**ACTUAL: Forbidden**
+
+**Evidence:**  
+Status: passed
+
+PART: AUTH APIs
+
+**TC-- 1.1-SIGNUP : Valid User Signup**
+
+Pre-condition: None
+
+Steps:
+
+1\. POST /auth/signup
+
+2.Body: { "username": "alice", "email": "<alice@test.com>", "password": "1234"}
+
+Expected:201Created, return
+
+{
+
+&nbsp;   "username": "alice",
+
+&nbsp;   "userId": 101
+
+}
+
+ACTUAL: to be filled during testing
+
+Evidence:
+
+status: passed successfully
+
+**TC-1.2-SIGNUP : duplicate Username Signup**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/signup
+
+2.Body: { "username": "alice", "email": "<alice@test.com>", "password": "1234"}
+
+Expected: 200ok, Username already taken
+
+ACTUAL: 400Bad Request Username already taken
+
+Evidence:
+
+status: already have a account .(passed)
+
+**TC- -1.3- SIGNUP : Signup WITH empty username**
+
+Pre-condition: User "alice "is already exixsts.
+
+1\. POST /auth/signup
+
+2.Body: { "username": " ", "email": "<alice@test.com>", "password": "1234"}
+
+Expected:201Created, return
+
+{
+
+&nbsp;   "username": " ",
+
+&nbsp;   "userId": 101
+
+}
+
+ACTUAL: 201Created , return
+
+{
+
+&nbsp;   "username": " ",
+
+&nbsp;   "userId": 102
+
+}
+
+Evidence:
+
+status: passed userId is 102
+
+**TC- 1.4- SIGNUP : Signup with empty email**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/signup
+
+2.Body: { "username": "alice", "email": " ", "password": "1234"}
+
+Expected: 400Bad Request,usermail is not have .
+
+ACTUAL: 400Bad Request Username already taken
+
+Evidence:
+
+Status :passed {security issue have .because without mail account show user account created . \[**bug found** \]
+
+**TC- -1.5- SIGNUP : Signup WITH INVALID EMAIL**
+
+Pre-condition: None
+
+1\. POST /auth/signup
+
+2.Body: { "username": "JARIN", "email": " NOT A MAIL", "password": "1234"}
+
+Expected: 400Bad Request UserMAIL IS INVALID
+
+ACTUAL:201 created , return {"username": "JARIN","userId": 103
+
+}
+
+Evidence:
+
+STATUS: passed {security issue have .because invalid mail account show user account created . \[**bug found** \]
+
+**TC- 1.6- SIGNUP : Signup with empty password**
+
+Pre-condition: None
+
+1\. POST /auth/signup
+
+2.Body: { "username": "Fariha", "email": "<fariha@test.com>", "password": " "}
+
+Expected: : 400Bad Request ,password not given entry the password .
+
+ACTUAL: 201 created , return
+
+{"username": " Fariha","userId": 104
+
+}
+
+Evidence:
+
+Status: passed {security issue have .because WITHOUT PASSWORD a user can created account}. \[**bug found\]**
+
+**TC- 1.7- SIGNUP :singup with Invalid request method( GET)**
+
+Pre-condition: None
+
+1\. GET /auth/signup
+
+2.Body: { "username": "alice", "email": "<alice@test.com>", "password": "1234"}
+
+Expected: 405 Method Not Allowed
+
+ACTUAL: 405Method Not Allowed return , {
+
+&nbsp;   "timestamp": "2026-01-09T09:17:13.430Z",
+
+&nbsp;   "status": 405,
+
+&nbsp;   "error": "Method Not Allowed",
+
+&nbsp;   "path": "/auth/signup"
+
+}
+
+Evidence:
+
+Status: passed . user cannt creat a account .bug not found
+
+**TC-1.8- SIGNUP : Signup with PUT method**
+
+Pre-condition: None
+
+1\. PUT /auth/signup
+
+2.Body: { "username": "Anika", "email": "<anika@test.com>", "password": "4321"}
+
+Expected: 405 Method Not Allowed
+
+ACTUAL: 405 Method Not Allowed ,RETURN,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T14:48:19.253Z",
+
+&nbsp;   "status": 405,
+
+&nbsp;   "error": "Method Not Allowed",
+
+&nbsp;   "path": "/auth/signup"
+
+}
+
+Evidence:
+
+Status: passed . user cannot creat a account . bug not found
+
+**TC- 1.9- SIGNUP : Signup with Extra Field (Role Injection) with invalid method**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- PUT /auth/signup
+- Body:
+
+{
+
+"username": "Anika",
+
+"email": "<anika@test.com>",
+
+"password": "4321",
+
+"role": "admin"
+
+}
+
+**Expected:**  
+201 Created (role should be ignored or rejected)
+
+**ACTUAL:** 405Method Not Allowed . return,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T15:04:13.069Z",
+
+&nbsp;   "status": 405,
+
+&nbsp;   "error": "Method Not Allowed",
+
+&nbsp;   "path": "/auth/signup"
+
+}
+
+**Evidence:**  
+Status: passed. because role= admin not accepted .\[have not Bug\]
+
+### ****TC- 1.10-**** SIGNUP ****: Signup with Very Long Username****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/signup
+- Body:
+
+{
+
+"username":"Anikaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+
+"email": "<anika@test.com>",
+
+"password": "4321"
+
+}
+
+**Expected:** 201 created, return a user account .
+
+**ACTUAL:** 201 created, return
+
+{
+
+&nbsp;   "username": "Anikaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+
+&nbsp;   "userId": 105
+
+}
+
+**Evidence:**  
+Status: passed. Allow the long username.
+
+### ****TC- 1.11-**** SIGNUP **: **Signup with SQL Injection Attempt****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/signup
+- Body:
+
+{
+
+"username": "' OR '1'='1",
+
+"email": "<sql@test.com>",
+
+"password": "1234"
+
+}
+
+**Expected:**  
+400 Bad Request (invalid input)
+
+**ACTUAL: 201 created return,.**
+
+{
+
+&nbsp;   "username": "' OR '1'='1",
+
+&nbsp;   "userId": 106
+
+}
+
+**Evidence:**  
+Status: here user account created . so Critical Security Bug present .(SQL Injection risk)
+
+### ****TC-1.12-**** SIGNUP ****: Signup with Same Email and same password but Different Username****
+
+**Pre-condition:**  
+User with email <alice@test.com> already exists
+
+**Steps:**
+
+- POST /auth/signup
+- Body:
+
+{
+
+"username": "alice_new",
+
+"email": "<alice@test.com>",
+
+"password": "1234"
+
+}
+
+**Expected: 201 created . a new user account with new name with the help of using used mail.**  
+
+**ACTUAL: 201 created . return ,**
+
+{
+
+&nbsp;   "username": "alice_new",
+
+&nbsp;   "userId": 107
+
+}
+
+**Evidence:**  
+Status: using same email and password a user can creat a new account with the help of new diffirent name.
+
+**TC-AUTH-3.1 : Valid User Logout**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- POST /auth/logout?username=alice
+
+**Expected:**  
+200 OK, "User logged out successfully"
+
+**ACTUAL:**  
+To be filled during testing. 200 OK, "User logged out successfully"
+
+**Evidence:**  
+Status: Passed successfully
+
+**TC-AUTH-3.2 : Logout Without Login**
+
+**Pre-condition:**  
+User "alice" is NOT logged in
+
+**Steps:**
+
+- POST /auth/logout?username=alice
+
+**Expected:**  
+400 Bad Request.
+
+**ACTUAL:** 400 Bad Request. Return ,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T20:17:07.357Z",
+
+&nbsp;   "status": 400,
+
+&nbsp;   "error": "Bad Request",
+
+&nbsp;   "path": "/auth//logout"
+
+}
+
+**Evidence:**  
+Status: passed.
+
+**TC-AUTH-3.3 : Logout with Non-Existent User**
+
+**Pre-condition:**  
+User "ghost" does not exist
+
+**Steps:**
+
+- POST /auth/logout?username=MUBASSIR
+
+**Expected:** 404 User not found ..This user cannot signup/ creat his account
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: **bug found** because get 200 OK
+
+**TC-AUTH-3.4 : Logout with Empty Username**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout?username=
+
+**Expected:**  
+400 Bad Request, "Username required"
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: get 200 OK ,so its **Validation Bug**
+
+**TC-AUTH-3.5 : Logout with Invalid Username Format**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout?username=@@@###
+
+**Expected:**  
+400 Bad Request. Invalid username.
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: **Input Validation Bug found**
+
+**TC-AUTH-3.6 : Logout Using GET Method**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- GET /auth/logout?username=alice
+
+**Expected:**  
+405 Method Not Allowed
+
+**ACTUAL:** 405 Method Not Allowed.return,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T20:39:47.220Z",
+
+&nbsp;   "status": 405,
+
+&nbsp;   "error": "Method Not Allowed",
+
+&nbsp;   "path": "/auth/logout"
+
+}
+
+**Evidence:**  
+Status: passed
+
+**TC-AUTH-3.7 : Logout Without Username Parameter**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout
+
+**Expected:**  
+400 Bad Request, "Username missing"
+
+**ACTUAL:** 400 Bad Request.return,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T20:43:25.220Z",
+
+&nbsp;   "status": 400,
+
+&nbsp;   "error": "Bad Request",
+
+&nbsp;   "path": "/auth/logout"
+
+}
+
+**Evidence:**  
+Status passed
+
+**TC-AUTH-3.8 : Logout with Extra Parameter**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- POST /auth/logout?username=alice&role=admin
+
+**Expected:** 400 Bad Request, **Extra Parameter not allow**  
+
+**ACTUAL: 200 ok . User logged out successfully**
+
+**Evidence:**  
+Status: role affects logout . Security Bug
+
+**TC-AUTH-3.9 : Multiple Logout Requests**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- POST /auth/logout?username=alice
+- Repeat same request again
+
+**Expected:**  
+1st: 200 OK  
+2nd: 404 Not Found.
+
+**ACTUAL:** 404 Not Found.
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T20:58:13.665Z",
+
+&nbsp;   "status": 404,
+
+&nbsp;   "error": "Not Found",
+
+&nbsp;   "path": "/auth/%20logout"
+
+}
+
+**Evidence:**  
+Status: passed.
+
+**TC-AUTH-3.10 : Logout with SQL Injection Attempt**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout?username=' OR '1'='1
+
+**Expected:**400 Bad Request
+
+**ACTUAL:** 404 Not Found.
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T20:58:13.665Z",
+
+&nbsp;   "status": 404,
+
+&nbsp;   "error": "Not Found",
+
+&nbsp;   "path": "/auth/%20logout"
+
+}
+
+**Evidence:**  
+Status: passed
+
+**TC-AUTH-2.1 : Valid login**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/login
+
+2.Body: { "username": "alice", "password": "1234"}
+
+Expected: 200 ok, return JWT token and userid
+
+ACTUAL: 400Bad Request,return Username already taken
+
+Evidence:
+
+Status: passed {with the help of only username and password user can login}
+
+**TC-AUTH-2.2 : LOGIN WITH WRONG PASSWORD**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/login
+
+2.Body: { "username": "alice", "password": "WRONG"}
+
+Expected: 401Unauthorized, "Invalid password"
+
+ACTUAL: 401Unauthorized, "Invalid password"
+
+Evidence:
+
+STATUS :PASSED
+
+### ****TC-AUTH-2.3 : login alice account using only Email and password . but using same email and same password have 2 Different Username account .****
+
+**Pre-condition:**  
+User with email <alice@test.com> already exists in2 different username account.
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"email": "<alice@test.com>",
+
+"password": "1234"
+
+}
+
+**Expected:** 500Internal Server Error. Server cannot found actual user.
+
+**ACTUAL:** 500Internal Server Error**. return ,**
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T15:45:54.133Z",
+
+&nbsp;   "status": 500,
+
+&nbsp;   "error": "Internal Server Error",
+
+&nbsp;   "path": "/auth/login"
+
+}
+
+**Evidence:**  
+Status: **login alice account using only Email and password . but using same email and same password have 2 Different Username account.so without** username server cannot found actual user account .
+
+### ****TC-AUTH-2.4 : Login with Non-Existent User****
+
+**Pre-condition:**  
+User "afrint" does not exist
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "afrin",
+
+"password": "1234"
+
+}
+
+**Expected:**  
+401 Unauthorized, "User not found"
+
+**ACTUAL:** 401 Unauthorized, "User not found"
+
+**Evidence:**  
+Status: Passed
+
+### ****TC-AUTH-2.5 : Login with Empty Username****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "",
+
+"password": "1234"
+
+}
+
+**Expected:**  
+400 Bad Request, "Username required"
+
+**ACTUAL:**
+
+**Evidence: 200 OK , Return ,**
+
+{
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3Njc5ODUyMDIsImV4cCI6MTc2Nzk4ODgwMn0.FVmmZ4ptYbjsN_73E9vyVTPX5rKJSwuzvRliBtFJYCs",
+
+&nbsp;   "userId": 102
+
+}
+
+Status: Passed. without username a user cannot login .
+
+### ****TC-AUTH-2.6 : Login with WITHOUT Password****
+
+**Pre-condition:**  
+User "Fariha" already exists
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "Fariha",
+
+"email": "<fariha@test.com>",
+
+"password": ""
+
+}
+
+**Expected:**  
+401Unauthorized Bad Request, "Password required"
+
+**ACTUAL:** {
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGYXJpaGEiLCJpYXQiOjE3NjgxMjEwNzEsImV4cCI6MTc2ODEyNDY3MX0.Q4dCYgIO-dCOY-2p0VtNx9_Xef8VpjxO8DLVbizJNtc",
+
+&nbsp;   "userId": 104
+
+}
+
+**Evidence:**  
+Status: BUG FOUND Without password user can login .
+
+**TC-AUTH-2.7 : Login with Missing Password Field**
+
+**Pre-condition:**  
+User "alice" already exists
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "alice"
+
+}
+
+**Expected:** 401 Unauthorized. Invalid password.
+
+**ACTUAL:** 401 Unauthorized. Invalid password.
+
+**Evidence:**  
+Status: passed. Without password field user can not login .
+
+**TC-AUTH-2.8 : Login with Missing Username Field**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"password": "1234"
+
+}
+
+**Expected:** 500Internal Server Error  
+
+**ACTUAL:** 500Internal Server Error. Return ,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T19:17:08.259Z",
+
+&nbsp;   "status": 500,
+
+&nbsp;   "error": "Internal Server Error",
+
+&nbsp;   "path": "/auth/login"
+
+}
+
+**Evidence:**  
+Status: Passed . Bug not found.
+
+**TC-AUTH-2.9 : Login with GET Method**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- GET /auth/login
+
+**Expected:** 405 Method Not Allowed
+
+**ACTUAL:** 405 Method Not Allowed.return,
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T19:25:43.393Z",
+
+&nbsp;   "status": 405,
+
+&nbsp;   "error": "Method Not Allowed",
+
+&nbsp;   "path": "/auth/login"
+
+}
+
+**Evidence:**  
+Status: passed. GETmethod cannt works .
+
+**TC-AUTH-2.10 : Login with Extra Field**
+
+**Pre-condition:**  
+User "alice" already exists
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "alice",
+
+"password": "1234",
+
+"role": "admin"
+
+}
+
+**Expected:**200 OK.
+
+**ACTUAL:** 200 OK,return,
+
+{
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2Nzk4NzE4MiwiZXhwIjoxNzY3OTkwNzgyfQ.hymdtvj10vCHSjW0eQtRG_UZcVbG2PCt2C52Q-bw4Cg",
+
+&nbsp;   "userId": 101
+
+}
+
+**Evidence:**  
+Status: passed .
+
+### ****TC-AUTH-2.11 : Login with SQL Injection Attempt****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "' OR '1'='1",
+
+"password": "' OR '1'='1"
+
+}
+
+**Expected:**  
+401 Unauthorized
+
+**ACTUAL:** 401 Unauthorized .RETURN , Invalid password.
+
+**Evidence:**  
+Status: PASSED.
+
+### ****TC-AUTH-2.12 : Login with Empty Body****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/signin
+- Body: {}
+
+**Expected:**  
+400 Bad Request
+
+**ACTUAL: 400 bad request. Return,**
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T19:51:15.906Z",
+
+&nbsp;   "status": 400,
+
+&nbsp;   "error": "Bad Request",
+
+&nbsp;   "path": "/auth/login"
+
+}
+
+**Evidence:**  
+Status: passed .
+
+**TC-AUTH-2.13 : USERNAME SPELLING MISTAKE**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/login
+
+2.Body: { "username": "Alice", "email": "<alice@test.com>", "password": "1234"}
+
+Expected: 401 unauthorized , user not found
+
+ACTUAL: 401 unauthorized , user not found
+
+Evidence:
+
+Status: passed
+
+**TC-AUTH-2.14 : given wrong email address**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/login
+
+2.Body: { "username": "alice", "email": "<alice@test.com>",
+
+"password": "1234"}
+
+Expected: 400Bad Request,return wrong email address
+
+ACTUAL: 200 ok , return
+
+{
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2ODExOTk0NSwiZXhwIjoxNzY4MTIzNTQ1fQ.u9etCjozkSNgoakdOK_v9xOMW66qkNUhpWU3MngH1Ec",
+
+&nbsp;   "userId": 101
+
+}
+
+Evidence:
+
+Status: **bug define.wrong email addres can allow to login**
+
+**_Signup_**
+
+**TC- 1.4- SIGNUP : Signup with empty email**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/signup
+
+2.Body: { "username": "alice", "email": " ", "password": "1234"}
+
+Expected: 400Bad Request,usermail is not have .
+
+ACTUAL: 400Bad Request Username already taken
+
+Evidence:
+
+Status : {security issue have .because without mail account show user account created . \[**bug found** \]
+
+**TC- -1.5- SIGNUP : Signup WITH INVALID EMAIL**
+
+Pre-condition: None
+
+1\. POST /auth/signup
+
+2.Body: { "username": "JARIN", "email": " NOT A MAIL", "password": "1234"}
+
+Expected: 400Bad Request UserMAIL IS INVALID
+
+ACTUAL:201 created , return {"username": "JARIN","userId": 103
+
+}
+
+Evidence:
+
+STATUS: passed {security issue have .because invalid mail account show user account created . \[**bug found** \]
+
+**TC- 1.6- SIGNUP : Signup with empty password (major problem)**
+
+Pre-condition: None
+
+1\. POST /auth/signup
+
+2.Body: { "username": "Fariha", "email": "<fariha@test.com>", "password": " "}
+
+Expected: : 400Bad Request ,password not given entry the password .
+
+ACTUAL: 201 created , return
+
+{"username": " Fariha","userId": 104
+
+}
+
+Evidence:
+
+Status: passed {security issue have .because WITHOUT PASSWORD a user can created account}. \[**bug found\]**
+
+### ****TC- 1.11-**** SIGNUP **: **Signup with SQL Injection Attempt****
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/signup
+- Body:
+
+{
+
+"username": "' OR '1'='1",
+
+"email": "<sql@test.com>",
+
+"password": "1234"
+
+}
+
+**Expected:**  
+400 Bad Request (invalid input)
+
+**ACTUAL: 201 created return,.**
+
+{
+
+&nbsp;   "username": "' OR '1'='1",
+
+&nbsp;   "userId": 106
+
+}
+
+**Evidence:**  
+Status: here user account created . so Critical Security Bug present .(SQL Injection risk)
+
+### ****_LOGIN :_****
+
+### ****TC-AUTH-2.3 : login alice account using only Email and password . but using same email and same password have 2 Different Username account .****
+
+**Pre-condition:**  
+User with email <alice@test.com> already exists in2 different username account.
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"email": "<alice@test.com>",
+
+"password": "1234"
+
+}
+
+**Expected:** 500Internal Server Error. Server cannot found actual user.
+
+**ACTUAL:** 500Internal Server Error**. return ,**
+
+{
+
+&nbsp;   "timestamp": "2026-01-09T15:45:54.133Z",
+
+&nbsp;   "status": 500,
+
+&nbsp;   "error": "Internal Server Error",
+
+&nbsp;   "path": "/auth/login"
+
+}
+
+**Evidence:**  
+Status: **login alice account using only Email and password . but using same email and same password have 2 Different Username account.so without** username server cannot found actual user account .
+
+### ****TC-AUTH-2.6 : Login with WITHOUT Password****
+
+**Pre-condition:**  
+User "Fariha" already exists
+
+**Steps:**
+
+- POST /auth/login
+- Body:
+
+{
+
+"username": "Fariha",
+
+"email": "<fariha@test.com>",
+
+"password": ""
+
+}
+
+**Expected:**  
+401Unauthorized Bad Request, "Password required"
+
+**ACTUAL:** {
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGYXJpaGEiLCJpYXQiOjE3N jgxMjEwNzEsImV4cCI6MTc2ODEyNDY3MX0.Q4dCYgIO-dCOY-2p0VtNx9_Xef8VpjxO8DLVbizJNtc",
+
+&nbsp;   "userId": 104
+
+}
+
+**Evidence:**  
+Status: BUG FOUND Without password user can login
+
+**TC-AUTH-2.14 : given wrong email address**
+
+Pre-condition: User "alice "is already exixsts
+
+1\. POST /auth/login
+
+2.Body: { "username": "alice", "email": "<alice@test.com>",
+
+"password": "1234"}
+
+Expected: 400Bad Request,return wrong email address
+
+ACTUAL: 200 ok , return
+
+{
+
+&nbsp;   "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2ODExOTk0NSwiZXhwIjoxNzY4MTIzNTQ1fQ.u9etCjozkSNgoakdOK_v9xOMW66qkNUhpWU3MngH1Ec",
+
+&nbsp;   "userId": 101
+
+}
+
+Evidence:
+
+Status: **bug define.wrong email addres can allow to login**
+
+**_LOGOUT_**
+
+**TC-AUTH-3.3 : Logout with Non-Existent User**
+
+**Pre-condition:**  
+User "ghost" does not exist
+
+**Steps:**
+
+- POST /auth/logout?username=MUBASSIR
+
+**Expected:** 404 User not found ..This user cannot signup/ creat his account
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: **bug found** because get 200 OK
+
+**TC-AUTH-3.4 : Logout with Empty Username**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout?username=
+
+**Expected:**  
+400 Bad Request, "Username required"
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: get 200 OK ,so its **Validation Bug**
+
+**TC-AUTH-3.5 : Logout with Invalid Username Format**
+
+**Pre-condition:** None
+
+**Steps:**
+
+- POST /auth/logout?username=@@@###
+
+**Expected:**  
+400 Bad Request. Invalid username.
+
+**ACTUAL:** 200 OK . User logged out successfully"
+
+**Evidence:**  
+Status: **Input Validation Bug found**
+
+**TC-AUTH-3.8 : Logout with Extra Parameter**
+
+**Pre-condition:**  
+User "alice" is logged in
+
+**Steps:**
+
+- POST /auth/logout?username=alice&role=admin
+
+**Expected:** 400 Bad Request, **Extra Parameter not allow**  
+
+**ACTUAL: 200 ok . User logged out successfully**
+
+**Evidence:**  
+Status: role affects logout . **Security Bug**

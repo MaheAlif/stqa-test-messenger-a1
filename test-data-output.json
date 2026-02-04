@@ -1,127 +1,126 @@
 {
-  "generatedAt": "2026-01-09T17:53:26.607Z",
+  "generatedAt": "2026-01-12T15:41:04.755Z",
   "baseUrl": "http://localhost:8080",
   "users": {
     "alice": {
       "userId": 101,
       "email": "alice@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2Nzk4MTIwNSwiZXhwIjoxNzY3OTg0ODA1fQ.QSBkBGLJKPzgTs5v_83AIVF5xCo0ll5iZ8uD3BmCQ2s"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.v0QQWKEMQV67WQWuLUqkTU17K060oJcBmkhrKygLdc4"
     },
-    //token == header;
     "bob": {
       "userId": 102,
       "email": "bob@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2IiLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.bOemSh4N00h4GE6YApj4DNYsgBSESKS4Si-m5r7nE1Q"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2IiLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.UKKTs-CXKJcPLohNoZWa_yEK4vGYyvxNcgTMJbqLH5w"
     },
     "charlie": {
       "userId": 103,
       "email": "charlie@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.MEounKynsrx7Yeo-cBPffwldX7Pv3-0laGgzBlCm0Sg"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFybGllIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.7tZpaOLUbLEQGeP-e3EiWa173DiVtug-MHBbPZV317M"
     },
     "david": {
       "userId": 104,
       "email": "david@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.ONBqgMw5MQONqN3pg1dLmAApGSJPK8APNeIbooB5RL4"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.NO4dzwfZrGUJxBh8LFGBe1TvHkNgtmaqIvL5rwDQdFc"
     },
     "eve": {
       "userId": 105,
       "email": "eve@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJldmUiLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.EITo5C6ebV4LNkJeS2IXQT2vf3iAC8_XE-FLRVxjedg"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJldmUiLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.SBTYiT1hthLrsa_X5d0cHbFI4JAQxpbbaquh5ccdC-k"
     },
     "frank": {
       "userId": 106,
       "email": "frank@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcmFuayIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.c-NjuN6CxSdeBFFVII--xKgSjMiwGKM194lNNs7QnmI"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcmFuayIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.a4EerT51YTiV5QwPzg2YyPGXT4fB_xdK8V1-7qVVF24"
     },
     "grace": {
       "userId": 107,
       "email": "grace@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmFjZSIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.ISJ4cWNMgE0bgK2m5JidlUfFSBV1syVJzMRqvcCxfVM"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJncmFjZSIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.tsju2df5TQ-HWnUercJDKw0MrgU4dEVwsn0P7zWKmEc"
     },
     "henry": {
       "userId": 108,
       "email": "henry@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZW5yeSIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.K_e0SQ68Sa7IVJ4pOeUg7k1e4kB9dpC4EHcYC4cFAcQ"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZW5yeSIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.pDNNWN6UW2FkyhzjXyviy1vEIMaI_9_dM82O5N0-OSY"
     },
     "iris": {
       "userId": 109,
       "email": "iris@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcmlzIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.wwVzhRQMXpzJ7QmuYpwCwsD6apSSFjowLbeK5TZtpX0"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcmlzIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.ah0RoP9yytQoXsLaoJpMZidiXxT0st0JwWDVtUbG01I"
     },
     "jack": {
       "userId": 110,
       "email": "jack@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNrIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.HqrvM7pW7QY4B-kbL7IdhTEoAt_v7_IQeOaUya1s3xQ"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNrIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.Px8aaGTgXwe1zrvDnshblxkxtnyzTLAn9mAh7h_w38g"
     },
     "kate": {
       "userId": 111,
       "email": "kate@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRlIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.Hvu-YGloKoVkxy_HiqOXt-IlqWVqkDmFP9EBKHJF6zQ"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRlIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.WMJeHsCHi3DoH41n_O3LcnBlVcti65meu2M3odmgOe8"
     },
     "leo": {
       "userId": 112,
       "email": "leo@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW8iLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.a6JEt5p605wgPCKTPZMQ3V42NuIdtnvDup-zSRwMjBo"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZW8iLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.7AN0qPxdPfks27UswEW6k1A5sanwgvsdsUqRFIucWSo"
     },
     "mia": {
       "userId": 113,
       "email": "mia@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWEiLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.gxnjARrADqofQSTmRFkOA1r5uNgaKQqFkHdbdoywXzA"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWEiLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.lHxsytA9pAnCNUxWaRO1tz_J-8-SpgZA8RwabJ46rUc"
     },
     "noah": {
       "userId": 114,
       "email": "noah@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJub2FoIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.nMMbUrn24_rTw9FgGB8szpEIJ7xz-lFx3tUu0iyr5So"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJub2FoIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.nKHa6bvOcMVNVjwPsQiQz9JnLy536VP1XH3TWHIeQS8"
     },
     "olivia": {
       "userId": 115,
       "email": "olivia@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbGl2aWEiLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.AQNHuBd8zNeyC9mmA3nGLYIkJ2vtWdRP37s6mHx_Qvo"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbGl2aWEiLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.lgYZU7NjJ9-mmzUiVi9nt7mcJ--USszDYUYFXTOzP4g"
     },
     "peter": {
       "userId": 116,
       "email": "peter@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlciIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.ofH2KJ1DSDLaEokFZJ-uyO2wkGrBxlbAg6SR6Z71-Nk"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRlciIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.0cVZH6VTSB-0UQDmmoxC3-RhRKEs53Z4XGQZImPsjXs"
     },
     "quinn": {
       "userId": 117,
       "email": "quinn@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWlubiIsImlhdCI6MTc2Nzk4MTIwNiwiZXhwIjoxNzY3OTg0ODA2fQ.xHzVV3fGXO4ZtLCN160UAB0sJR_ZMda_oiu-zaGFbRo"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWlubiIsImlhdCI6MTc2ODIzMjQ2NCwiZXhwIjoxNzY4MjM2MDY0fQ.1wY3XN42Ns3MdOw80fpkiBv_b7d2Lusjyi3LY_O0n4I"
     },
     "rachel": {
       "userId": 118,
       "email": "rachel@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNoZWwiLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.t3GIboMuu85u0gb131JgRIdkJy4zzqsT2AnQLCIObfs"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWNoZWwiLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.jnM4MjDzq0mbDd2V5KWe-QJ09iD4S1DizANwuB-tgnM"
     },
     "sam": {
       "userId": 119,
       "email": "sam@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW0iLCJpYXQiOjE3Njc5ODEyMDYsImV4cCI6MTc2Nzk4NDgwNn0.bJYBQ9oC43yaRNpsDZDCaNSImf1W58wTtDQ01dtDVtg"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW0iLCJpYXQiOjE3NjgyMzI0NjQsImV4cCI6MTc2ODIzNjA2NH0.VRqY3gg-6sGLI44gR17qTqVi2T1VpcczLUPNo5fu5jU"
     },
     "tina": {
       "userId": 120,
       "email": "tina@test.com",
       "password": "password123",
-      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aW5hIiwiaWF0IjoxNzY3OTgxMjA2LCJleHAiOjE3Njc5ODQ4MDZ9.xLi1xO955opw3bsmD0jlQIwOVLDw7q0rZ5GAzO2PXOk"
+      "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aW5hIiwiaWF0IjoxNzY4MjMyNDY0LCJleHAiOjE3NjgyMzYwNjR9.SLDYqAdSluHbXh-ohvpjPKFikj-alktdQucBvtIlNpo"
     }
   }
 }

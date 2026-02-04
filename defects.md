@@ -1,10 +1,6 @@
 ## PART 1: AUTH APIs
 
-
 ## PART 2: USER APIs
-
-
-
 
 ## PART 3: CONVERSATION APIs
 
@@ -45,7 +41,7 @@
 ### D-CONV-003: Create DIRECT with Non-existent User
 
 - **Test-Case:** TC-CONV-005
-- **Severity:** - 
+- **Severity:** -
 - **Pre-conditions:** User alice logged in
 - **Steps:**
   1. POST /conversations/create
@@ -62,7 +58,7 @@
 ### D-CONV-004: Create DIRECT with Blocked User
 
 - **Test-Case:** TC-CONV-005
-- **Severity:** - 
+- **Severity:** -
 - **Pre-conditions:** Alice has blocked Bob (102)
 - **Steps:**
   1. POST /conversations/create
@@ -76,6 +72,27 @@
 }`
 - **Evidence:** ![TC-CONV-006](Evidence/TC-CONV-006.png)
 
+### D-CONV-005: Add Member to GROUP (Non-creator)
 
+- **Test-Case:** TC-CONV-012
+- **Severity:** -
+- **Pre-conditions:** AGROUP 202 exists, alice is creator, bob is member (not creator)
+- **Steps:**
+  1. POST /conversations/addMember
+  2. Header: `Authorization: Bearer <bob_token>`
+  3. Body: `{"conversationId":202,"members":[104]}`
+- **Expected:** 400 Bad Request, only creator can add (per spec)
+- **Actual:** 200 OK, returns `{
+    "message": "Members added successfully",
+    "conversationId": 202,
+    "memberIds": [
+        101,
+        102,
+        103,
+        104
+    ]
+}`
+- **Verdict:** This is a **Defect**
+- **Evidence:** ![TC-CONV-012](Evidence/TC-CONV-012.png)
 
 ## PART 4: MESSAGE APIs
