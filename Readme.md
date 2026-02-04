@@ -295,4 +295,4 @@ For questions or clarifications about this testing project, please contact any t
 
 **Completed:** January 12, 2026  
 **Course:** Software Testing and Quality Assurance  
-**Institution:** [Your Institution Name]
+**Institution:** United International University
